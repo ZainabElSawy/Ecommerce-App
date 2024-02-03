@@ -1,0 +1,82 @@
+{
+    "one": "أختر اللغة",
+    "two": "العربية",
+    "three": "الأنجليزية",
+
+    "onboardingtitle1": "أختر المنتج",
+    "onboardingtitle2": "دفع سهل وآمن",
+    "onboardingtitle3": "أتبع طلبك",
+    "onboardingcontent1":
+        "لدينا أكثر من 100 ألف منتج، اختر \n منتجاتك من\n متجر التجارة الإلكترونية .",
+    "onboardingcontent2":
+        "طريقة دفع سهلة وآمنة \n. موثوق به من قبل عملائنا \n من جميع أنحاء العالم.",
+    "onboardingcontent3":
+        "تم استخدام أفضل أداة تعقب \n لتتبع طلبك. ستعرف مكان \n منتجك في الوقت الحالي.",
+    "onboardingcustombutton": "أستمر",
+
+
+    "signin": " تسجيل الدخول ",
+    "signintitle": "مرحبًا بعودتك",
+    "signincontent":
+        "قم بتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور أو تابع وسائل التواصل الاجتماعي",
+    "enteryouremail": "أدخل بريدك الإلكتروني",
+    "email": "حساب البريد", 
+    "enteryourpassword": "أدخل رقمك السري",
+    "password": "الرقم السري",
+    "forgetpassword": "نسيت كلمة المرور",
+    "donthaveanaccount": " ليس لديك حساب ؟ ",
+
+    
+    "signup": "إنشاء حساب",
+    "signuptitle": "مرحبًا بك هنا",
+    "enteryourusername": "أدخل اسم المستخدم الخاص بك",
+    "username": "اسم المستخدم",
+    "enteryourphone": "أدخل رقم هاتفك",
+    "phone": "رقم الهاتف",
+    "signUpcontent":
+        "أشترك باستخدام بريدك الإلكتروني وكلمة المرور أو تابع وسائل التواصل الاجتماعي",
+    "haveanaccount": " لديك حساب ؟ ",
+        "checkemail": "تفقد البريد الإلكتروني",
+    "check": "فحص",
+    "forgetpasscontent":
+        "الرجاء إدخال عنوان بريدك الإلكتروني لتلقي رمز التحقق.",
+
+    
+    "verifycode": "التحقق من كود",
+    "checkcode": "التحقق من الشفرة",
+    "checkcodecontent":
+        "الرجاء إدخال رمز الرقم المرسل إلىzainabhamdy001@gmail.com",
+
+    
+    "resetpass": "إعادة تعيين كلمة المرور",
+    "newpass": "كلمة المرور الجديدة",
+    "resetpasscontent": "من فضلك أدخل كلمة مرور جديدة",
+    "save": "حفظ",
+    "reenteryourpassword": "أعد إدخال كلمة المرور",
+
+    
+    "successsignup": "تم إنشاء حساب بنجاح",
+
+    
+    "success": "تم بنجاح",
+    "congratulations": "تهانينا",
+    "successfullyregistered": "تم تسجيل حساب جديد بنجاح !",
+    "gotologin": "الذهاب إلي تسجيل الدخول",
+
+    
+    "passwordhasbeenresetsuccessfully":
+        "تم إعادة تعيين كلمة المرور بنجاح",
+    
+    "cannotbeembty": "هذا الحقل لا يمكن أن يكون فارغَا !",
+    "cannotbelessthan": "هذا الحقل لايمكن أن يكون اقل من",
+    "cannotbelargerthan": "هذا الحقل لا يمكن أن يكون أكبر من ",
+    "notvalidusername": "اسم مستخدم غير صالح",
+    "notvalidemail": "بريد الكتروني غير صالح",
+    "notvalidphonenumber": "رقم هاتف غير صالح",
+
+    
+    "alert": "تنبيه",
+    "doyouwanttoexitfromthisapp": "هل تريد الخروج من التطبيق",
+    "confirm": "تأكيد",
+    "cancel": "الغاء"
+}

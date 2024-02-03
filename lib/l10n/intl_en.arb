@@ -1,0 +1,87 @@
+{
+    "one": "Choose Language",
+    "two": "Ar",
+    "three": "En",
+
+
+    "onboardingtitle1": "Choose Product",
+    "onboardingtitle2": "Easy And Safe Payment",
+    "onboardingtitle3": "Track Your Order",
+    "onboardingcontent1":
+        "We Have a 100k+ Products, Choose\n Your products from E-\ncommerce shop.",
+    "onboardingcontent2":
+        "Easy Checkout And Safe Payment \nmethod. Trusted by our Customers \nfrom all over the world.",
+    "onboardingcontent3":
+        "Best Tracker has been Used For \nTrack your order. You'll know where\n your product is at the moment.",
+    "onboardingcustombutton": "Continue",
+
+
+    
+    "signin": " Sign In ",
+    "signintitle": "Welcome Back",
+    "signincontent":
+        "Sign in with your email and password or continue with social media",
+    "enteryouremail": "Enter your email",
+    "email": "Email",
+    "enteryourpassword": "Enter your password",
+    "password": "Password",
+    "forgetpassword": "Forget password",
+    "donthaveanaccount": " Don't have an account ? ",
+
+    
+    "signup": " Sign Up ",
+    "signuptitle": "Welcome here!",
+
+    "enteryourusername": "Enter your username",
+    "username": "Username",
+    "enteryourphone": "Enter your phone",
+    "phone": "Phone",
+    "signUpcontent":
+        "Sign Up with your email and password or continue with social media",
+    "haveanaccount": " Have an account ? ",
+
+    
+    "checkemail": "Check Email",
+    "check": "Check",
+    "forgetpasscontent":
+        "Please enter your email address to recive a verification code. ",
+
+
+    "verifycode": "Verify Code",
+    "checkcode": "Check Code",
+    "checkcodecontent":
+        "Please enter the digit code sent to zainabhamdy001@gmail.com",
+    
+    "resetpass": "Reset password",
+    "newpass": "New password",
+    "resetpasscontent": "Please enter new password",
+    "save": "Save",
+    "reenteryourpassword": "Re-Enter your password",
+
+    
+    "successsignup": "Account successfully created",
+
+
+    "success": "Success",
+    "congratulations": "Congratulations",
+    "successfullyregistered": "Successfully Registered",
+    "gotologin": "Go To Login",
+
+    
+    "passwordhasbeenresetsuccessfully":
+        "Password has been reset successfully",
+
+
+    "cannotbeembty": "Can not be embty",
+    "cannotbelessthan": "Can not be less than",
+    "cannotbelargerthan": "Can not be larger than",
+    "notvalidusername": "Not valid username",
+    "notvalidemail": "Not valid email",
+    "notvalidphonenumber": "Not valid phone number",
+
+
+    "alert": "Alert",
+    "doyouwanttoexitfromthisapp": "Do you want to exit from this app",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+}
