@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "checkcode": MessageLookupByLibrary.simpleMessage("Check Code"),
         "checkcodecontent": MessageLookupByLibrary.simpleMessage(
-            "Please enter the digit code sent to zainabhamdy001@gmail.com"),
+            "Please enter the digit code sent to"),
         "checkemail": MessageLookupByLibrary.simpleMessage("Check Email"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "congratulations":

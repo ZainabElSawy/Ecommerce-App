@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "check": MessageLookupByLibrary.simpleMessage("فحص"),
         "checkcode": MessageLookupByLibrary.simpleMessage("التحقق من الشفرة"),
         "checkcodecontent": MessageLookupByLibrary.simpleMessage(
-            "الرجاء إدخال رمز الرقم المرسل إلىzainabhamdy001@gmail.com"),
+            "الرجاء إدخال رمز الرقم المرسل إلى"),
         "checkemail":
             MessageLookupByLibrary.simpleMessage("تفقد البريد الإلكتروني"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),

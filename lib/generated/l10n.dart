@@ -370,10 +370,10 @@ class S {
     );
   }
 
-  /// `Please enter the digit code sent to zainabhamdy001@gmail.com`
+  /// `Please enter the digit code sent to`
   String get checkcodecontent {
     return Intl.message(
-      'Please enter the digit code sent to zainabhamdy001@gmail.com',
+      'Please enter the digit code sent to',
       name: 'checkcodecontent',
       desc: '',
       args: [],

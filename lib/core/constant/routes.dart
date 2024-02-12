@@ -16,8 +16,6 @@ import '../../features/language/presentation/views/pages/language.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit/on_boarding_cubit.dart';
 import '../../main.dart';
 
-
-
 abstract class AppRouter {
   static const String login = "/login";
   static const String signup = "/signup";
@@ -50,7 +48,8 @@ abstract class AppRouter {
       GoRoute(path: signup, builder: (context, state) => const SignUp()),
       GoRoute(
           path: verifyCodeSignUp,
-          builder: (context, state) => const VerifyCodeSignUp()),
+          builder: (context, state) =>
+              VerifyCodeSignUp(email: state.extra as String)),
       GoRoute(
           path: forgetPassword,
           builder: (context, state) => const ForgetPassword()),
@@ -59,8 +58,6 @@ abstract class AppRouter {
       GoRoute(
           path: resetPassword,
           builder: (context, state) => const ResetPassword()),
-      GoRoute(
-          path: verifyCode, builder: (context, state) => const VerifyCode()),
       GoRoute(
           path: successResetPassword,
           builder: (context, state) => const SuccessResetPassword()),
@@ -72,7 +69,13 @@ abstract class AppRouter {
 }
 
 extension RoutingX on BuildContext {
-  void pushPage({required String route}) {
-    GoRouter.of(this).push(route);
+  void pushPage({required String route, Object? extra}) {
+    GoRouter.of(this).push(route, extra: extra);
+  }
+}
+
+extension RoutingY on BuildContext {
+  void pushReplacePage({required String route}) {
+    GoRouter.of(this).pushReplacement(route);
   }
 }

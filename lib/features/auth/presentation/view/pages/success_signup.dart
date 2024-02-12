@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/constant/color.dart';
+import 'package:ecommerce_app/features/auth/presentation/view/widget/customauthappbar.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -10,19 +11,9 @@ class SuccessSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: AppColor.backgroundcolor,
-        elevation: 0.0,
-        title: Text(
-          S.of(context).success,
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium!
-              .copyWith(color: AppColor.grey),
-        ),
-      ),
+      appBar: CustomAuthAppBar(title: S.of(context).success),
       body: Container(
+        color: AppColor.backgroundcolor,
         padding: const EdgeInsets.all(15),
         width: double.infinity,
         child: Column(
@@ -50,7 +41,7 @@ class SuccessSignUp extends StatelessWidget {
                 width: double.infinity,
                 child: CustomButtonAuth(
                     text: S.of(context).gotologin,
-                    onPressed: ()=>context.pushPage(route: AppRouter.login))),
+                    onPressed: () => context.pushPage(route: AppRouter.login))),
             const SizedBox(height: 30),
           ],
         ),

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:ecommerce_app/core/constant/imageassets.dart';
 import 'package:flutter/material.dart';
 

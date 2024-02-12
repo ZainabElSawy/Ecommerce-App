@@ -91,8 +91,10 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     var formdata = formState.currentState;
                     if (formdata!.validate()) {
+                      // ignore: avoid_print
                       print("valid");
                     } else {
+                      // ignore: avoid_print
                       print("Not valid");
                     }
                   },

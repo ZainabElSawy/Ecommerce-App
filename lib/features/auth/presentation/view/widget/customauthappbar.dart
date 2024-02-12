@@ -13,7 +13,6 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      surfaceTintColor: AppColor.backgroundcolor,
       backgroundColor: AppColor.backgroundcolor,
       elevation: 0.0,
       centerTitle: true,
