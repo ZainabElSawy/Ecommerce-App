@@ -80,6 +80,8 @@ dependencies:
   go_router: ^12.1.1
   flutter_localization: ^0.1.14
   flutter_bloc: ^7.1.0
+  connectivity_plus: ^5.0.2
+  dio: ^5.4.0
 
 dev_dependencies:
   flutter_test:

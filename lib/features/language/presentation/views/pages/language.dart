@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/constant/routes.dart';
+import 'package:ecommerce_app/core/functions/checkinterner.dart';
 import 'package:ecommerce_app/features/language/presentation/view_models/locale_cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +7,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../generated/l10n.dart';
 import '../widgets/consumbuttonlang.dart';
 
-class Language extends StatelessWidget {
+class Language extends StatefulWidget {
   const Language({super.key});
+
+  @override
+  State<Language> createState() => _LanguageState();
+}
+
+class _LanguageState extends State<Language> {
+  var res;
+  initialData() async {
+    res = await checkInternet();
+    print(res);
+  }
+
+  @override
+  void initState() {
+    initialData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

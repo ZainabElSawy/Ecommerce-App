@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/core/functions/validinput.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/constant/routes.dart';
 import '../../../../../core/functions/alertexitapp.dart';
 import '../../../../../generated/l10n.dart';
@@ -15,11 +14,9 @@ import '../widget/logoauth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
-
   @override
   State<Login> createState() => _LoginState();
 }
-
 class _LoginState extends State<Login> {
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   late TextEditingController email;
@@ -30,7 +27,6 @@ class _LoginState extends State<Login> {
     password = TextEditingController();
     super.initState();
   }
-
   @override
   void dispose() {
     email.dispose();
@@ -114,5 +110,5 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-  
+
 }
