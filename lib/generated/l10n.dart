@@ -260,6 +260,16 @@ class S {
     );
   }
 
+  /// ` Try again`
+  String get tryagain {
+    return Intl.message(
+      ' Try again',
+      name: 'tryagain',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter your username`
   String get enteryourusername {
     return Intl.message(
@@ -560,10 +570,10 @@ class S {
     );
   }
 
-  /// `Do you want to exit from this app`
+  /// `Are you sure you want to exit from this app ?`
   String get doyouwanttoexitfromthisapp {
     return Intl.message(
-      'Do you want to exit from this app',
+      'Are you sure you want to exit from this app ?',
       name: 'doyouwanttoexitfromthisapp',
       desc: '',
       args: [],

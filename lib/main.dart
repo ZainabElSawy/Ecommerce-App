@@ -3,7 +3,8 @@ import 'package:ecommerce_app/core/constant/apptheme.dart';
 import 'package:ecommerce_app/core/services/api_services.dart';
 import 'package:ecommerce_app/features/auth/data/data_source/auth_data_source.dart';
 import 'package:ecommerce_app/features/auth/data/repos/auth_repo_imp.dart';
-import 'package:ecommerce_app/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:ecommerce_app/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
+import 'package:ecommerce_app/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
 import 'package:ecommerce_app/features/language/presentation/view_models/locale_cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -28,9 +30,13 @@ class MyApp extends StatelessWidget {
         BlocProvider<LocaleCubit>(
           create: (BuildContext context) => LocaleCubit()..getSavedLanguage(),
         ),
-        BlocProvider<AuthCubit>(
-          create: (BuildContext context) =>
-              AuthCubit(AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        BlocProvider<SignUpCubit>(
+          create: (BuildContext context) => SignUpCubit(
+              AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        ),
+        BlocProvider<VerifyCodeCubit>(
+          create: (BuildContext context) => VerifyCodeCubit(
+              AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
         ),
       ],
       child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
@@ -50,8 +56,8 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
 }
+
 Locale? localResolutionCallbackFunc(deviceLocale, supportedLocales) {
   for (var locale in supportedLocales) {
     if (deviceLocale != null &&
@@ -62,12 +68,11 @@ Locale? localResolutionCallbackFunc(deviceLocale, supportedLocales) {
   return supportedLocales.first;
 }
 
-final Iterable<Locale> supportedLocales =  [
+final Iterable<Locale> supportedLocales = [
   const Locale('en'),
   const Locale("ar"),
 ];
-const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
-[
+const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = [
   S.delegate,
   GlobalMaterialLocalizations.delegate,
   GlobalWidgetsLocalizations.delegate,

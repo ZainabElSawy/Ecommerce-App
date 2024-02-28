@@ -12,4 +12,8 @@ abstract class AuthRepo {
     required String password,
     required String phone,
   });
+  Future<Either<Failure, User>> verifyCodeSignUp({
+    required String email,
+    required int verifyCode,
+  });
 }

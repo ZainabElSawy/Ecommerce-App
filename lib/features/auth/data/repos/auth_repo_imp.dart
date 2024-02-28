@@ -31,7 +31,38 @@ class AuthRepoImp implements AuthRepo {
       try {
         dynamic data = await authDataSource.signUp(
             email: email, username: username, password: password, phone: phone);
-        return right(data);
+        if (data["status"] == "failure") {
+          return left(DataFailure(data["message"]));
+        } else {
+          return right(data['data']);
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> verifyCodeSignUp(
+      {required String email, required int verifyCode}) async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        dynamic data = await authDataSource.verifyCodeSignUp(
+            email: email, verifyCode: verifyCode);
+        if (data["status"] == "failure") {
+          return left(DataFailure(data["message"]));
+        } else {
+          User user = User.fromJson(data['data']);
+          return right(user);
+        }
       } catch (e) {
         // ignore: deprecated_member_use
         if (e is DioError) {

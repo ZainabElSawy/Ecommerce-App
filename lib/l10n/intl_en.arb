@@ -31,6 +31,7 @@
     
     "signup": " Sign Up ",
     "signuptitle": "Welcome here!",
+    "tryagain":" Try again",
 
     "enteryourusername": "Enter your username",
     "username": "Username",
@@ -81,7 +82,7 @@
 
 
     "alert": "Alert",
-    "doyouwanttoexitfromthisapp": "Do you want to exit from this app",
+    "doyouwanttoexitfromthisapp": "Are you sure you want to exit from this app ?",
     "confirm": "Confirm",
     "cancel": "Cancel"
 }

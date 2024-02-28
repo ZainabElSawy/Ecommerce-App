@@ -8,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../../../../core/constant/color.dart';
 import '../../../../../core/functions/custom_error_snack_bar.dart';
-import '../../manager/auth_cubit/auth_cubit.dart';
+import '../../manager/signup_cubit/signup_cubit.dart';
+import '../widget/auth_failure_state.dart';
 import '../widget/signup_content.dart';
 
 class SignUp extends StatefulWidget {
@@ -24,6 +25,7 @@ class _SignUpState extends State<SignUp> {
   late TextEditingController phone;
   late TextEditingController password;
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
+
   @override
   void initState() {
     username = TextEditingController();
@@ -52,42 +54,52 @@ class _SignUpState extends State<SignUp> {
         onWillPop: () async => alertExitApp(context),
         child: Form(
           key: formstate,
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            padding: const EdgeInsets.all(15),
-            child: BlocConsumer<AuthCubit, AuthState>(
-              builder: (context, state) {
-                if (state is AuthLoading) {
-                  return Center(child: Lottie.asset(AppImageAsset.loading));
-                } else if (state is AuthNetworkFailure) {
-                  return Center(child: Lottie.asset(AppImageAsset.internet));
-                } else if (state is AuthServerFailure) {
-                  return Center(child: Lottie.asset(AppImageAsset.server));
-                } else {
-                  return SignUpContent(
-                    username: username,
-                    email: email,
-                    phone: phone,
-                    password: password,
-                    formstate: formstate,
-                  );
-                }
-              },
-              listener: (BuildContext context, AuthState state) {
-                if (state is AuthSuccess) {
-                  context.pushPage(
-                    route: AppRouter.verifyCodeSignUp,
-                    extra: email.text,
-                  );
-                } else if (state is AuthFailure) {
-                  customSnackBar(context, state.errMessage);
-                }
-              },
-            ),
+          child: BlocConsumer<SignUpCubit, SignUpState>(
+            builder: (context, state) {
+              if (state is SignUpLoading) {
+                return Center(child: Lottie.asset(AppImageAsset.loading));
+              } else if (state is SignUpNetworkFailure) {
+                return AuthFailureState(
+                  onPressed: signUpMethod,
+                  image: AppImageAsset.internet,
+                );
+              } else if (state is SignUpServerFailure) {
+                return AuthFailureState(
+                  onPressed: signUpMethod,
+                  image: AppImageAsset.server,
+                );
+              } else {
+                return SignUpContent(
+                  username: username,
+                  email: email,
+                  phone: phone,
+                  password: password,
+                  formstate: formstate,
+                );
+              }
+            },
+            listener: (context, state) {
+              if (state is SignUpSuccess) {
+                context.pushReplacePage(
+                  route: AppRouter.verifyCodeSignUp,
+                  extra: email.text,
+                );
+              } else if (state is SignUpFailure) {
+                customSnackBar(context, state.errMessage);
+              }
+            },
           ),
         ),
       ),
     );
   }
-}
 
+  void signUpMethod() {
+    context.read<SignUpCubit>().signUp(
+          username: username.text,
+          email: email.text,
+          password: password.text,
+          phone: phone.text,
+        );
+  }
+}

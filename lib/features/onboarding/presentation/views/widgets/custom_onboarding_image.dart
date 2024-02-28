@@ -5,7 +5,6 @@ class CustomOnBoardingImage extends StatelessWidget {
     super.key,
     required this.image,
     required this.size,
-
   });
 
   final String image;
@@ -13,10 +12,13 @@ class CustomOnBoardingImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      image,
-      height: size.height / 2.4,
-      fit: BoxFit.fill,
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Image.asset(
+        image,
+        height: size.height / 2.4,
+        fit: BoxFit.fill,
+      ),
     );
   }
 }

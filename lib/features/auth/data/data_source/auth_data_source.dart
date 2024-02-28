@@ -5,6 +5,8 @@ import '../models/user_model.dart';
 
 abstract class AuthDataSource {
   Future<User> login({required String email, required String password});
+  Future<dynamic> verifyCodeSignUp(
+      {required String email, required int verifyCode});
   Future<dynamic> signUp({
     required String username,
     required String email,
@@ -35,6 +37,19 @@ class AuthDataSourceImp extends AuthDataSource {
       "users_email": email,
       "users_phone": phone,
     });
+    return data;
+  }
+
+  @override
+  Future<dynamic> verifyCodeSignUp(
+      {required String email, required int verifyCode}) async {
+    var data =
+        await apiService.post(endPoint: AppLinks.verifyCodeSignUp, data: {
+      "users_email": email,
+      "users_verifycode": verifyCode,
+    });
+    print("111111111111111111111");
+    print(data);
     return data;
   }
 }

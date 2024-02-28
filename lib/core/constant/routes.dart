@@ -75,7 +75,7 @@ extension RoutingX on BuildContext {
 }
 
 extension RoutingY on BuildContext {
-  void pushReplacePage({required String route}) {
-    GoRouter.of(this).pushReplacement(route);
+  void pushReplacePage({required String route, Object? extra}) {
+    GoRouter.of(this).pushReplacement(route, extra: extra);
   }
 }

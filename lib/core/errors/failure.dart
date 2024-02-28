@@ -51,3 +51,6 @@ class ServerFailure extends Failure {
 class NetworkFailure extends Failure {
   NetworkFailure(String errorMessage) : super(errorMessage);
 }
+class DataFailure extends Failure {
+  DataFailure(String errorMessage) : super(errorMessage);
+}

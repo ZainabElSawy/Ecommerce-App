@@ -29,6 +29,7 @@
     
     "signup": "إنشاء حساب",
     "signuptitle": "مرحبًا بك هنا",
+    "tryagain":" حاول مرة اخرى  ",
     "enteryourusername": "أدخل اسم المستخدم الخاص بك",
     "username": "اسم المستخدم",
     "enteryourphone": "أدخل رقم هاتفك",
@@ -76,7 +77,7 @@
 
     
     "alert": "تنبيه",
-    "doyouwanttoexitfromthisapp": "هل تريد الخروج من التطبيق",
+    "doyouwanttoexitfromthisapp": "هل انت متأكد من انك تريد الخروج من هذا التطبيق؟",
     "confirm": "تأكيد",
     "cancel": "الغاء"
 }

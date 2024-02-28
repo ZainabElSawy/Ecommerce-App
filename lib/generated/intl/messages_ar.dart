@@ -40,8 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "congratulations": MessageLookupByLibrary.simpleMessage("تهانينا"),
         "donthaveanaccount":
             MessageLookupByLibrary.simpleMessage(" ليس لديك حساب ؟ "),
-        "doyouwanttoexitfromthisapp":
-            MessageLookupByLibrary.simpleMessage("هل تريد الخروج من التطبيق"),
+        "doyouwanttoexitfromthisapp": MessageLookupByLibrary.simpleMessage(
+            "هل انت متأكد من انك تريد الخروج من هذا التطبيق؟"),
         "email": MessageLookupByLibrary.simpleMessage("حساب البريد"),
         "enteryouremail":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "successsignup":
             MessageLookupByLibrary.simpleMessage("تم إنشاء حساب بنجاح"),
         "three": MessageLookupByLibrary.simpleMessage("الأنجليزية"),
+        "tryagain": MessageLookupByLibrary.simpleMessage(" حاول مرة اخرى  "),
         "two": MessageLookupByLibrary.simpleMessage("العربية"),
         "username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "verifycode": MessageLookupByLibrary.simpleMessage("التحقق من كود")

@@ -41,7 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donthaveanaccount":
             MessageLookupByLibrary.simpleMessage(" Don\'t have an account ? "),
         "doyouwanttoexitfromthisapp": MessageLookupByLibrary.simpleMessage(
-            "Do you want to exit from this app"),
+            "Are you sure you want to exit from this app ?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "enteryouremail":
             MessageLookupByLibrary.simpleMessage("Enter your email"),
@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "successsignup": MessageLookupByLibrary.simpleMessage(
             "Account successfully created"),
         "three": MessageLookupByLibrary.simpleMessage("En"),
+        "tryagain": MessageLookupByLibrary.simpleMessage(" Try again"),
         "two": MessageLookupByLibrary.simpleMessage("Ar"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "verifycode": MessageLookupByLibrary.simpleMessage("Verify Code")
