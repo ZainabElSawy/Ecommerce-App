@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ecommerce_app/core/constant/routes.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../../../../core/constant/color.dart';
+import '../../../../../core/constant/imageassets.dart';
+import '../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../manager/verify_code_cubit/verify_code_cubit.dart';
+import '../widget/auth_failure_state.dart';
 import '../widget/customauthappbar.dart';
-import '../widget/customtextbodyauth.dart';
-import '../widget/customtexttitleauth.dart';
+import '../widget/verify_code_sign_up_content.dart';
 
 class VerifyCodeSignUp extends StatelessWidget {
   final String email;
@@ -18,34 +22,40 @@ class VerifyCodeSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.backgroundcolor,
-        appBar: CustomAuthAppBar(title: S.of(context).verifycode),
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          padding: const EdgeInsets.all(15),
-          child: ListView(
-            children: [
-              CustomTextTiteAuth(title: S.of(context).checkcode),
-              const SizedBox(height: 10),
-              CustomTextBodyAuth(content: "${S.of(context).checkcodecontent} $email"),
-              const SizedBox(height: 15),
-              OtpTextField(
-                focusedBorderColor: AppColor.primarycolor,
-                cursorColor: AppColor.primarycolor,
-                fieldWidth: 50.0,
-                borderRadius: BorderRadius.circular(20),
-                numberOfFields: 5,
-                borderColor: AppColor.primarycolor,
-                showFieldAsBox: true,
-                onCodeChanged: (String code) {
-                  //handle validation or checks here
-                },
-                onSubmit: (String verificationCode) =>
-                    context.pushPage(route: AppRouter.successSignUp),
-              ),
-              const SizedBox(height: 30),
-            ],
-          ),
-        ));
+      backgroundColor: AppColor.backgroundcolor,
+      appBar: CustomAuthAppBar(title: S.of(context).verifycode),
+      body: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
+        listener: (context, state) {
+          if (state is VerifyCodeSuccess) {
+            context.pushPage(route: AppRouter.successSignUp);
+          } else if (state is VerifyCodeFailure) {
+            customSnackBar(context, state.errMessage);
+          }
+        },
+        builder: (context, state) {
+          if (state is VerifyCodeLoading) {
+            return Center(child: Lottie.asset(AppImageAsset.loading));
+          } else if (state is VerifyCodeNetworkFailure) {
+            return AuthFailureState(
+              onPressed: () => verifyCodeMethod(context),
+              image: AppImageAsset.internet,
+            );
+          } else if (state is VerifyCodeServerFailure) {
+            return AuthFailureState(
+              onPressed: () => verifyCodeMethod(context),
+              image: AppImageAsset.server,
+            );
+          } else {
+            return VerifyCodeSignUpContent(email: email);
+          }
+        },
+      ),
+    );
+  }
+
+  void verifyCodeMethod(BuildContext context) {
+    context.read<VerifyCodeCubit>().verifyCodeSignUp(
+        email: email,
+        verifyCode: int.parse(context.read<VerifyCodeCubit>().verifyCode));
   }
 }
