@@ -97,4 +97,76 @@ class AuthRepoImp implements AuthRepo {
       return left(NetworkFailure('No internet connection'));
     }
   }
+  
+  @override
+  Future<Either<Failure, dynamic>> checkEmail({required String email}) async{
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        dynamic data = await authDataSource.checkEmail(email: email);
+        if (data["status"] == "failure") {
+          return left(DataFailure(data["message"]));
+        } else {
+          return right("Success");
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, dynamic>> resetPassword({required String email, required String newPassword}) async{
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        dynamic data = await authDataSource.resetPassword(email: email, newPassword: newPassword);
+        if (data["status"] == "failure") {
+          return left(DataFailure(data["message"]));
+        } else {
+          return right("Success");
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, dynamic>> verifyCodeForgetPassword({required String email, required int verifyCode})async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        dynamic data = await authDataSource.verifyCodeForgetPassword(email: email, verifyCode: verifyCode);
+        if (data["status"] == "failure") {
+          return left(DataFailure(data["message"]));
+        } else {
+          return right("Success");
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
 }

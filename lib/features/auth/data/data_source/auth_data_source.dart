@@ -8,5 +8,13 @@ abstract class AuthDataSource {
     required String password,
     required String phone,
   });
+  Future<dynamic> checkEmail({required String email});
+  Future<dynamic> verifyCodeForgetPassword({
+    required String email,
+    required int verifyCode,
+  });
+  Future<dynamic> resetPassword({
+    required String email,
+    required String newPassword,
+  });
 }
-

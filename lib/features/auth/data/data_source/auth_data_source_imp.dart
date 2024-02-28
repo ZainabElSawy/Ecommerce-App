@@ -44,4 +44,30 @@ class AuthDataSourceImp extends AuthDataSource {
     });
     return data;
   }
+
+  @override
+  Future checkEmail({required String email}) async {
+    var data = await apiService
+        .post(endPoint: AppLinks.checkEmail, data: {"users_email": email});
+    return data;
+  }
+  
+  @override
+  Future resetPassword({required String email, required String newPassword})async {
+    var data = await apiService.post(endPoint: AppLinks.resetPass, data: {
+      "users_password": newPassword,
+      "users_email": email,
+    });
+    return data;
+  }
+  
+  @override
+  Future verifyCodeForgetPassword({required String email, required int verifyCode})async {
+     var data =
+        await apiService.post(endPoint: AppLinks.verifyCodeForgetPass, data: {
+      "users_email": email,
+      "users_verifycode": verifyCode,
+    });
+    return data;
+  }
 }

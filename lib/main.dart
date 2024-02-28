@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce_app/core/constant/apptheme.dart';
 import 'package:ecommerce_app/core/services/api_services.dart';
 import 'package:ecommerce_app/features/auth/data/repos/auth_repo_imp.dart';
+import 'package:ecommerce_app/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
@@ -41,6 +42,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LoginCubit>(
           create: (BuildContext context) => LoginCubit(
+              AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        ),
+        BlocProvider<ForgetPasswordCubit>(
+          create: (BuildContext context) => ForgetPasswordCubit(
               AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
         ),
       ],

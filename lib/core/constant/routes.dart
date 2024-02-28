@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/forgetpassword.dart';
+import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/check_email.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/resetpassword.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/success_resetpassword.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/verifycode.dart';
@@ -49,14 +49,17 @@ abstract class AppRouter {
       GoRoute(path: login, builder: (context, state) => const Login()),
       GoRoute(path: signup, builder: (context, state) => const SignUp()),
       GoRoute(
-          path: verifyCodeSignUp,
-          builder: (context, state) =>
-              VerifyCodeSignUp(email: state.extra as String)),
+        path: verifyCodeSignUp,
+        builder: (context, state) =>
+            VerifyCodeSignUp(email: state.extra as String),
+      ),
       GoRoute(
           path: forgetPassword,
-          builder: (context, state) => const ForgetPassword()),
+          builder: (context, state) => const CheckEmail()),
       GoRoute(
-          path: verifyCode, builder: (context, state) => const VerifyCode()),
+        path: verifyCode,
+        builder: (context, state) => VerifyCode(email: state.extra as String),
+      ),
       GoRoute(
           path: resetPassword,
           builder: (context, state) => const ResetPassword()),
@@ -66,9 +69,7 @@ abstract class AppRouter {
       GoRoute(
           path: successSignUp,
           builder: (context, state) => const SuccessSignUp()),
-      GoRoute(
-          path: home,
-          builder: (context, state) => const Home()),
+      GoRoute(path: home, builder: (context, state) => const Home()),
     ],
   );
 }
