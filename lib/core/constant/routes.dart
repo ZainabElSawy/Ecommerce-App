@@ -12,6 +12,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/view/pages/login.dart';
 import '../../features/auth/presentation/view/pages/verifycodesignup.dart';
+import '../../features/home/presentation/views/pages/home.dart';
 import '../../features/language/presentation/views/pages/language.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit/on_boarding_cubit.dart';
 import '../../main.dart';
@@ -26,6 +27,7 @@ abstract class AppRouter {
   static const String successResetPassword = "/successresetpassword";
   static const String successSignUp = "/successsignup";
   static const String verifyCodeSignUp = "/verifycodesignup";
+  static const String home = "/home";
   static final route = GoRouter(
     routes: [
       //Language
@@ -64,6 +66,9 @@ abstract class AppRouter {
       GoRoute(
           path: successSignUp,
           builder: (context, state) => const SuccessSignUp()),
+      GoRoute(
+          path: home,
+          builder: (context, state) => const Home()),
     ],
   );
 }

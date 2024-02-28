@@ -13,9 +13,32 @@ class AuthRepoImp implements AuthRepo {
   AuthRepoImp(this.authDataSource);
 
   @override
-  Future<Either<Failure, User>> login(
-      {required String email, required String password}) {
-    throw UnimplementedError();
+  Future<Either<Failure, User>> login({
+    required String email,
+    required String password,
+  }) async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        dynamic data =
+            await authDataSource.login(email: email, password: password);
+        if (data["status"] == "failure") {
+          return left(DataFailure(data["message"]));
+        } else {
+          User user = User.fromJson(data['data'][0]);
+          return right(user);
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
   }
 
   @override
@@ -60,7 +83,7 @@ class AuthRepoImp implements AuthRepo {
         if (data["status"] == "failure") {
           return left(DataFailure(data["message"]));
         } else {
-          User user = User.fromJson(data['data']);
+          User user = User.fromJson(data['data'][0]);
           return right(user);
         }
       } catch (e) {

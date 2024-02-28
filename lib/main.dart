@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/core/constant/apptheme.dart';
 import 'package:ecommerce_app/core/services/api_services.dart';
-import 'package:ecommerce_app/features/auth/data/data_source/auth_data_source.dart';
 import 'package:ecommerce_app/features/auth/data/repos/auth_repo_imp.dart';
+import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
 import 'package:ecommerce_app/features/language/presentation/view_models/locale_cubit/locale_cubit.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/constant/routes.dart';
+import 'features/auth/data/data_source/auth_data_source_imp.dart';
 import 'generated/l10n.dart';
 
 SharedPreferences? sharedPreferences;
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<VerifyCodeCubit>(
           create: (BuildContext context) => VerifyCodeCubit(
+              AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        ),
+        BlocProvider<LoginCubit>(
+          create: (BuildContext context) => LoginCubit(
               AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
         ),
       ],
