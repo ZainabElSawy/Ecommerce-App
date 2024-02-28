@@ -1,48 +1,66 @@
-import 'package:ecommerce_app/core/constant/routes.dart';
-import 'package:ecommerce_app/features/auth/presentation/view/widget/customauthappbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:ecommerce_app/features/auth/presentation/view/widget/customauthappbar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../../../../../core/constant/color.dart';
+import '../../../../../../core/constant/imageassets.dart';
+import '../../../../../../core/constant/routes.dart';
+import '../../../../../../core/functions/custom_error_snack_bar.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../widget/customtextbodyauth.dart';
-import '../../widget/customtexttitleauth.dart';
+import '../../../manager/forget_password_cubit/forget_password_cubit.dart';
+import '../../widget/auth_failure_state.dart';
+import '../../widget/forget_password/verify_code_forget_pass_content.dart';
 
 class VerifyCode extends StatelessWidget {
-  const VerifyCode({super.key});
+  final String email;
+  const VerifyCode({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.backgroundcolor,
-        appBar: CustomAuthAppBar(
-          title: S.of(context).verifycode,
-        ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          padding: const EdgeInsets.all(15),
-          child: ListView(
-            children: [
-              CustomTextTiteAuth(title: S.of(context).checkcode),
-              const SizedBox(height: 10),
-              CustomTextBodyAuth(content: S.of(context).checkcodecontent),
-              const SizedBox(height: 15),
-              OtpTextField(
-                focusedBorderColor: AppColor.primarycolor,
-                cursorColor: AppColor.primarycolor,
-                fieldWidth: 50.0,
-                borderRadius: BorderRadius.circular(20),
-                numberOfFields: 5,
-                borderColor: AppColor.primarycolor,
-                showFieldAsBox: true,
-                onCodeChanged: (String code) {
-                  //handle validation or checks here
-                },
-                onSubmit: (String verificationCode) =>
-                    context.pushPage(route: AppRouter.resetPassword),
-              ),
-              const SizedBox(height: 30),
-            ],
-          ),
-        ));
+      backgroundColor: AppColor.backgroundcolor,
+      appBar: CustomAuthAppBar(
+        title: S.of(context).verifycode,
+      ),
+      body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
+        listener: (context, state) {
+          if (state is ForgetPasswordSuccess) {
+            context.pushPage(route: AppRouter.resetPassword);
+          } else if (state is ForgetPasswordFailure) {
+            customSnackBar(context, state.errMessage);
+          }
+        },
+        builder: (context, state) {
+          if (state is ForgetPasswordLoading) {
+            return Center(child: Lottie.asset(AppImageAsset.loading));
+          } else if (state is ForgetPasswordNetworkFailure) {
+            return AuthFailureState(
+              onPressed: () => verifyCodeMethod(context),
+              image: AppImageAsset.internet,
+            );
+          } else if (state is ForgetPasswordServerFailure) {
+            return AuthFailureState(
+              onPressed: () => verifyCodeMethod(context),
+              image: AppImageAsset.server,
+            );
+          } else {
+            return VerifyCodeForgetPassContent(email: email);
+          }
+        },
+      ),
+    );
+  }
+
+  verifyCodeMethod(BuildContext context) {
+    context.read<ForgetPasswordCubit>().verifyCode(
+          email: email,
+          verifyCode: int.parse(context.read<ForgetPasswordCubit>().code),
+        );
   }
 }
+
+
+//context.pushPage(route: AppRouter.resetPassword),
