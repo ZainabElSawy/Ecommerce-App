@@ -1,22 +1,35 @@
-class User {
+import 'package:hive/hive.dart';
+part 'user_model.g.dart';
+
+@HiveType(typeId: 0)
+class User extends HiveObject {
+  @HiveField(0)
   int? usersId;
+  @HiveField(1)
   String? usersName;
+  @HiveField(2)
   String? usersPassword;
+  @HiveField(3)
   String? usersEmail;
+  @HiveField(4)
   String? usersPhone;
+  @HiveField(5)
   int? usersVerifycode;
+  @HiveField(6)
   int? usersApprove;
+  @HiveField(7)
   String? usersCreate;
 
-  User(
-      {this.usersId,
-      this.usersName,
-      this.usersPassword,
-      this.usersEmail,
-      this.usersPhone,
-      this.usersVerifycode,
-      this.usersApprove,
-      this.usersCreate});
+  User({
+    this.usersId,
+    this.usersName,
+    this.usersPassword,
+    this.usersEmail,
+    this.usersPhone,
+    this.usersVerifycode,
+    this.usersApprove,
+    this.usersCreate,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     usersId = json['users_id'];
@@ -42,3 +55,5 @@ class User {
     return data;
   }
 }
+//write part + file name.g.dart
+// flutter packages pub run build_runner build

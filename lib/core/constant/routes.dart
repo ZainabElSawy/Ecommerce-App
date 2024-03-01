@@ -9,7 +9,9 @@ import 'package:ecommerce_app/features/onboarding/presentation/views/pages/onboa
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 
+import '../../features/auth/data/models/user_model.dart';
 import '../../features/auth/presentation/view/pages/login.dart';
 import '../../features/auth/presentation/view/pages/verifycodesignup.dart';
 import '../../features/home/presentation/views/pages/home.dart';
@@ -33,8 +35,9 @@ abstract class AppRouter {
       //Language
       GoRoute(
         path: "/",
-        builder: (context, state) =>
-            sharedPreferences?.getString("onboarding") == null
+        builder: (context, state) => retrieveUser() != null
+            ? const Home()
+            : sharedPreferences?.getString("onboarding") == null
                 ? const Language()
                 : const Login(),
       ),
@@ -62,7 +65,8 @@ abstract class AppRouter {
       ),
       GoRoute(
           path: resetPassword,
-          builder: (context, state) => const ResetPassword()),
+          builder: (context, state) =>
+              ResetPassword(email: state.extra as String)),
       GoRoute(
           path: successResetPassword,
           builder: (context, state) => const SuccessResetPassword()),
@@ -84,4 +88,9 @@ extension RoutingY on BuildContext {
   void pushReplacePage({required String route, Object? extra}) {
     GoRouter.of(this).pushReplacement(route, extra: extra);
   }
+}
+
+User? retrieveUser() {
+  var userBox = Hive.box<User>('userBox');
+  return userBox.get('userKey');
 }

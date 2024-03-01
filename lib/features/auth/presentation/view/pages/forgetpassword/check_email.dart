@@ -42,7 +42,7 @@ class _CheckEmailState extends State<CheckEmail> {
       body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
         listener: (context, state) {
           if (state is ForgetPasswordSuccess) {
-            context.pushPage(route: AppRouter.verifyCode,extra: email.text);
+            context.pushPage(route: AppRouter.verifyCode, extra: email.text);
           } else if (state is ForgetPasswordFailure) {
             customSnackBar(context, state.errMessage);
           }

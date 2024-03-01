@@ -11,13 +11,12 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.authRepo) : super(LoginInitial());
   AuthRepo authRepo;
 
-   login({
+  login({
     required String email,
     required String password,
   }) async {
     emit(LoginLoading());
-    var result =
-        await authRepo.login(email: email, password: password);
+    var result = await authRepo.login(email: email, password: password);
     result.fold((failure) {
       if (failure is ServerFailure) {
         emit(LoginServerFailure(failure.errorMessage));

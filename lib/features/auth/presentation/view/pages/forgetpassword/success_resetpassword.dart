@@ -11,9 +11,8 @@ class SuccessResetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAuthAppBar(
-        title: S.of(context).success,
-      ),
+      backgroundColor: AppColor.backgroundcolor,
+      appBar: CustomAuthAppBar(title: S.of(context).success),
       body: Container(
         padding: const EdgeInsets.all(15),
         width: double.infinity,

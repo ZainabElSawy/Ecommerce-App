@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -24,6 +25,12 @@ class _LoginState extends State<Login> {
   late TextEditingController password;
   @override
   void initState() {
+    FirebaseMessaging.instance.getToken().then((value) {
+      String? token = value;
+      print("***********************");
+      print(token);
+      print("***********************");
+    });
     email = TextEditingController();
     password = TextEditingController();
     super.initState();

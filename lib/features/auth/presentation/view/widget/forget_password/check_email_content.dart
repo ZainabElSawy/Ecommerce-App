@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/constant/routes.dart';
 import '../../../../../../core/functions/validinput.dart';
 import '../../../../../../generated/l10n.dart';
+import '../../../manager/forget_password_cubit/forget_password_cubit.dart';
 import '../custombuttonauth.dart';
 import '../customtextbodyauth.dart';
 import '../customtextformauth.dart';
@@ -37,7 +38,7 @@ class CheckEmailContent extends StatelessWidget {
           ),
           CustomButtonAuth(
             text: S.of(context).check,
-            onPressed: () => context.pushPage(route: AppRouter.verifyCode),
+            onPressed: () => context.read<ForgetPasswordCubit>().checkEmail(email: email.text),
           ),
           const SizedBox(height: 30),
         ],

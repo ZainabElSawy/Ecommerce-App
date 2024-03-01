@@ -11,6 +11,7 @@ class SuccessSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.backgroundcolor,
       appBar: CustomAuthAppBar(title: S.of(context).success),
       body: Container(
         color: AppColor.backgroundcolor,

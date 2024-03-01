@@ -28,8 +28,9 @@ class VerifyCode extends StatelessWidget {
       body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
         listener: (context, state) {
           if (state is ForgetPasswordSuccess) {
-            context.pushPage(route: AppRouter.resetPassword);
+            context.pushPage(route: AppRouter.resetPassword, extra: email);
           } else if (state is ForgetPasswordFailure) {
+            context.read<ForgetPasswordCubit>().code = "";
             customSnackBar(context, state.errMessage);
           }
         },
@@ -61,6 +62,3 @@ class VerifyCode extends StatelessWidget {
         );
   }
 }
-
-
-//context.pushPage(route: AppRouter.resetPassword),
