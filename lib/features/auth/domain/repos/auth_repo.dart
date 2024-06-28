@@ -18,13 +18,14 @@ abstract class AuthRepo {
     required String email,
     required int verifyCode,
   });
-   Future<Either<Failure, dynamic>> checkEmail({required String email});
-   Future<Either<Failure, dynamic>> verifyCodeForgetPassword({
+  Future<Either<Failure, dynamic>> checkEmail({required String email});
+  Future<Either<Failure, dynamic>> verifyCodeForgetPassword({
     required String email,
     required int verifyCode,
   });
-   Future<Either<Failure, dynamic>> resetPassword({
+  Future<Either<Failure, dynamic>> resetPassword({
     required String email,
     required String newPassword,
   });
+  Future<Either<Failure, String>> otpResend({required String userEmail});
 }

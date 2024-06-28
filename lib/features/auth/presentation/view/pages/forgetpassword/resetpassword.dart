@@ -9,8 +9,8 @@ import '../../../../../../../../../core/constant/color.dart';
 import '../../../../../../core/constant/imageassets.dart';
 import '../../../../../../core/constant/routes.dart';
 import '../../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../../../../../core/shared/failure_widget.dart';
 import '../../../manager/forget_password_cubit/forget_password_cubit.dart';
-import '../../widget/auth_failure_state.dart';
 import '../../widget/forget_password/reset_password_content.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -58,12 +58,12 @@ class _ResetPasswordState extends State<ResetPassword> {
           if (state is ForgetPasswordLoading) {
             return Center(child: Lottie.asset(AppImageAsset.loading));
           } else if (state is ForgetPasswordNetworkFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: checkEmailMethod,
               image: AppImageAsset.internet,
             );
           } else if (state is ForgetPasswordServerFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: checkEmailMethod,
               image: AppImageAsset.server,
             );

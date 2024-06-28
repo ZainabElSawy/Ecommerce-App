@@ -599,6 +599,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Find Product`
+  String get findproduct {
+    return Intl.message(
+      'Find Product',
+      name: 'findproduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A summer surprise`
+  String get asummersurprise {
+    return Intl.message(
+      'A summer surprise',
+      name: 'asummersurprise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cashback 20%`
+  String get cashback {
+    return Intl.message(
+      'Cashback 20%',
+      name: 'cashback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product for you`
+  String get productforyou {
+    return Intl.message(
+      'Product for you',
+      name: 'productforyou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go To Cart`
+  String get gotocart {
+    return Intl.message(
+      'Go To Cart',
+      name: 'gotocart',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

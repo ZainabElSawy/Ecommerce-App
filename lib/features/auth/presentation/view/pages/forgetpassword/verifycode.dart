@@ -7,9 +7,9 @@ import '../../../../../../../../../core/constant/color.dart';
 import '../../../../../../core/constant/imageassets.dart';
 import '../../../../../../core/constant/routes.dart';
 import '../../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../../../../../core/shared/failure_widget.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../manager/forget_password_cubit/forget_password_cubit.dart';
-import '../../widget/auth_failure_state.dart';
 import '../../widget/forget_password/verify_code_forget_pass_content.dart';
 
 class VerifyCode extends StatelessWidget {
@@ -38,12 +38,12 @@ class VerifyCode extends StatelessWidget {
           if (state is ForgetPasswordLoading) {
             return Center(child: Lottie.asset(AppImageAsset.loading));
           } else if (state is ForgetPasswordNetworkFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: () => verifyCodeMethod(context),
               image: AppImageAsset.internet,
             );
           } else if (state is ForgetPasswordServerFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: () => verifyCodeMethod(context),
               image: AppImageAsset.server,
             );

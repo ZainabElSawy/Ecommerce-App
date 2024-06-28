@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../../../../core/constant/color.dart';
 import '../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../../../../core/shared/failure_widget.dart';
 import '../../manager/signup_cubit/signup_cubit.dart';
-import '../widget/auth_failure_state.dart';
 import '../widget/signup_content.dart';
 
 class SignUp extends StatefulWidget {
@@ -59,12 +59,12 @@ class _SignUpState extends State<SignUp> {
               if (state is SignUpLoading) {
                 return Center(child: Lottie.asset(AppImageAsset.loading));
               } else if (state is SignUpNetworkFailure) {
-                return AuthFailureState(
+                return FailureWidget(
                   onPressed: signUpMethod,
                   image: AppImageAsset.internet,
                 );
               } else if (state is SignUpServerFailure) {
-                return AuthFailureState(
+                return FailureWidget(
                   onPressed: signUpMethod,
                   image: AppImageAsset.server,
                 );

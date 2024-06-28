@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/features/auth/data/models/user_model.dart';
 import 'package:ecommerce_app/features/auth/domain/repos/auth_repo.dart';
-import 'package:hive/hive.dart';
+import 'package:ecommerce_app/main.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../data_source/auth_data_source.dart';
@@ -28,7 +28,8 @@ class AuthRepoImp implements AuthRepo {
           return left(DataFailure(data["message"]));
         } else {
           User user = User.fromJson(data['data']);
-          saveUser(user);
+          sharedPreferences!.setInt("userid", user.usersId!);
+          // saveUser(user);
           return right(user);
         }
       } catch (e) {
@@ -175,9 +176,29 @@ class AuthRepoImp implements AuthRepo {
       return left(NetworkFailure('No internet connection'));
     }
   }
-}
 
-void saveUser(User user) async {
-  var userBox = await Hive.openBox<User>('userBox');
-  await userBox.put('userKey', user);
+  @override
+  Future<Either<Failure, String>> otpResend({required String userEmail}) async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        Map<String, dynamic> data = await authDataSource.otpResend(
+            userEmail: userEmail) as Map<String, dynamic>;
+        if (data["status"] == "success") {
+          return right("Success");
+        } else {
+          return left(DataFailure(data["message"]));
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
 }

@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alert": MessageLookupByLibrary.simpleMessage("تنبيه"),
+        "asummersurprise": MessageLookupByLibrary.simpleMessage("مفاجأة الصيف"),
         "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "cannotbeembty": MessageLookupByLibrary.simpleMessage(
             "هذا الحقل لا يمكن أن يكون فارغَا !"),
@@ -30,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "هذا الحقل لا يمكن أن يكون أكبر من "),
         "cannotbelessthan": MessageLookupByLibrary.simpleMessage(
             "هذا الحقل لايمكن أن يكون اقل من"),
+        "cashback": MessageLookupByLibrary.simpleMessage("استرداد نقدي 20%"),
         "check": MessageLookupByLibrary.simpleMessage("فحص"),
         "checkcode": MessageLookupByLibrary.simpleMessage("التحقق من الشفرة"),
         "checkcodecontent": MessageLookupByLibrary.simpleMessage(
@@ -51,14 +53,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل رقم هاتفك"),
         "enteryourusername":
             MessageLookupByLibrary.simpleMessage("أدخل اسم المستخدم الخاص بك"),
+        "findproduct": MessageLookupByLibrary.simpleMessage("ابحث عن المنتج"),
         "forgetpasscontent": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال عنوان بريدك الإلكتروني لتلقي رمز التحقق."),
         "forgetpassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
+        "gotocart": MessageLookupByLibrary.simpleMessage("اذهب الي العربة"),
         "gotologin":
             MessageLookupByLibrary.simpleMessage("الذهاب إلي تسجيل الدخول"),
         "haveanaccount": MessageLookupByLibrary.simpleMessage(" لديك حساب ؟ "),
+        "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "newpass": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
+        "notification": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "notvalidemail":
             MessageLookupByLibrary.simpleMessage("بريد الكتروني غير صالح"),
         "notvalidphonenumber":
@@ -82,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "تم إعادة تعيين كلمة المرور بنجاح"),
         "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "productforyou": MessageLookupByLibrary.simpleMessage("منتجات لك"),
+        "profile": MessageLookupByLibrary.simpleMessage("الشخصية"),
         "reenteryourpassword":
             MessageLookupByLibrary.simpleMessage("أعد إدخال كلمة المرور"),
         "resetpass":
@@ -89,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetpasscontent": MessageLookupByLibrary.simpleMessage(
             "من فضلك أدخل كلمة مرور جديدة"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "signUpcontent": MessageLookupByLibrary.simpleMessage(
             "أشترك باستخدام بريدك الإلكتروني وكلمة المرور أو تابع وسائل التواصل الاجتماعي"),
         "signin": MessageLookupByLibrary.simpleMessage(" تسجيل الدخول "),

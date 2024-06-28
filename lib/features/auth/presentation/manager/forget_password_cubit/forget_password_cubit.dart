@@ -55,5 +55,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       emit(ForgetPasswordSuccess());
     });
   }
-
+  resendOTP({required String userEmail}) async {
+    await authRepo.otpResend(userEmail: userEmail);
+  }
 }

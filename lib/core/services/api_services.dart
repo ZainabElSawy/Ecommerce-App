@@ -8,7 +8,7 @@ class ApiService {
   Future<Map<String, dynamic>> get({required String endPoint}) async {
     try {
       Response response = await dio.get(endPoint);
-      return response.data;
+      return json.decode(response.data);
     } catch (e) {
       rethrow;
     }

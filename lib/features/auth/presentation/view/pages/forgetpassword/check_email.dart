@@ -6,8 +6,8 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../../../../core/constant/color.dart';
 import '../../../../../../core/constant/imageassets.dart';
 import '../../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../../../../../core/shared/failure_widget.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../widget/auth_failure_state.dart';
 import '../../widget/forget_password/check_email_content.dart';
 import '../../widget/customauthappbar.dart';
 
@@ -51,12 +51,12 @@ class _CheckEmailState extends State<CheckEmail> {
           if (state is ForgetPasswordLoading) {
             return Center(child: Lottie.asset(AppImageAsset.loading));
           } else if (state is ForgetPasswordNetworkFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: checkEmailMethod,
               image: AppImageAsset.internet,
             );
           } else if (state is ForgetPasswordServerFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: checkEmailMethod,
               image: AppImageAsset.server,
             );

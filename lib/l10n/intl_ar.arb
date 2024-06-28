@@ -79,5 +79,18 @@
     "alert": "تنبيه",
     "doyouwanttoexitfromthisapp": "هل انت متأكد من انك تريد الخروج من هذا التطبيق؟",
     "confirm": "تأكيد",
-    "cancel": "الغاء"
+    "cancel": "الغاء",
+
+
+    "findproduct":"ابحث عن المنتج",
+    "asummersurprise":"مفاجأة الصيف",
+    "cashback":"استرداد نقدي 20%",
+    "productforyou":"منتجات لك",
+
+    "home":"الرئيسية",
+    "settings":"الاعدادات",
+    "profile":"الشخصية",
+    "notification":"الاشعارات",
+
+    "gotocart":"اذهب الي العربة"
 }

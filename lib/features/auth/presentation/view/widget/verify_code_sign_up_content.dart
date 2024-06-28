@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import '../../../../../core/constant/color.dart';
 import '../../../../../generated/l10n.dart';
 import '../../manager/verify_code_cubit/verify_code_cubit.dart';
+import 'custom_resend_row.dart';
 import 'customtextbodyauth.dart';
 import 'customtexttitleauth.dart';
 
@@ -39,14 +39,16 @@ class VerifyCodeSignUpContent extends StatelessWidget {
             showFieldAsBox: true,
             onCodeChanged: (String code) =>
                 context.read<VerifyCodeCubit>().verifyCode += code,
-            onSubmit: (String verificationCode) => context
-                .read<VerifyCodeCubit>()
-                .verifyCodeSignUp(
-                    email: email,
-                    verifyCode:
-                        int.parse(context.read<VerifyCodeCubit>().verifyCode)),
+            onSubmit: (String verificationCode) {
+              context.read<VerifyCodeCubit>().verifyCodeSignUp(
+                  email: email,
+                  verifyCode:
+                      int.parse(context.read<VerifyCodeCubit>().verifyCode));
+              context.read<VerifyCodeCubit>().verifyCode = "";
+            },
           ),
           const SizedBox(height: 30),
+          CustomResendRow(userEmail: email),
         ],
       ),
     );

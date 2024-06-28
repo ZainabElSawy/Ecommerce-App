@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../generated/l10n.dart';
+import '../../../../../main.dart';
 import '../widgets/consumbuttonlang.dart';
 
 class Language extends StatelessWidget {
@@ -26,6 +27,7 @@ class Language extends StatelessWidget {
             ConsumButtonLang(
               textButton: S.of(context).two,
               onPressed: () {
+                sharedPreferences?.setString("lang", "ar");
                 context.read<LocaleCubit>().changeLanguage("ar");
                 context.pushPage(route: AppRouter.onBoarding);
               },
@@ -33,6 +35,7 @@ class Language extends StatelessWidget {
             ConsumButtonLang(
               textButton: S.of(context).three,
               onPressed: () {
+                sharedPreferences?.setString("lang", "en");
                 context.read<LocaleCubit>().changeLanguage("en");
                 context.pushPage(route: AppRouter.onBoarding);
               },

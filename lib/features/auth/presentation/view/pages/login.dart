@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -8,8 +10,8 @@ import '../../../../../core/constant/imageassets.dart';
 import '../../../../../core/constant/routes.dart';
 import '../../../../../core/functions/alertexitapp.dart';
 import '../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../../../../core/shared/failure_widget.dart';
 import '../../../../../generated/l10n.dart';
-import '../widget/auth_failure_state.dart';
 import '../widget/customauthappbar.dart';
 import '../widget/login_content.dart';
 
@@ -27,9 +29,9 @@ class _LoginState extends State<Login> {
   void initState() {
     FirebaseMessaging.instance.getToken().then((value) {
       String? token = value;
-      print("***********************");
-      print(token);
-      print("***********************");
+      log("***********************");
+      log("$token");
+      log("***********************");
     });
     email = TextEditingController();
     password = TextEditingController();
@@ -56,7 +58,14 @@ class _LoginState extends State<Login> {
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccess) {
-                context.pushPage(route: AppRouter.home);
+                if (state.user.usersApprove == 1) {
+                  context.pushPage(route: AppRouter.home);
+                } else {
+                  context.pushReplacePage(
+                    route: AppRouter.verifyCodeSignUp,
+                    extra: state.user.usersEmail,
+                  );
+                }
               } else if (state is LoginFailure) {
                 customSnackBar(context, state.errMessage);
               }
@@ -65,12 +74,12 @@ class _LoginState extends State<Login> {
               if (state is LoginLoading) {
                 return Center(child: Lottie.asset(AppImageAsset.loading));
               } else if (state is LoginNetworkFailure) {
-                return AuthFailureState(
+                return FailureWidget(
                   onPressed: loginMethod,
                   image: AppImageAsset.internet,
                 );
               } else if (state is LoginServerFailure) {
-                return AuthFailureState(
+                return FailureWidget(
                   onPressed: loginMethod,
                   image: AppImageAsset.server,
                 );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../core/constant/linkapi.dart';
 import '../../../../core/services/api_services.dart';
 import 'auth_data_source.dart';
@@ -68,6 +70,14 @@ class AuthDataSourceImp extends AuthDataSource {
       "users_email": email,
       "users_verifycode": verifyCode,
     });
+    return data;
+  }
+
+  
+  @override
+  Future otpResend({required String userEmail}) async {
+    var data = await apiService.post(endPoint: AppLinks.resendOTP, data: {"users_email": userEmail});
+    log("$data");
     return data;
   }
 }

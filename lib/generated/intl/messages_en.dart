@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
+        "asummersurprise":
+            MessageLookupByLibrary.simpleMessage("A summer surprise"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cannotbeembty":
             MessageLookupByLibrary.simpleMessage("Can not be embty"),
@@ -30,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can not be larger than"),
         "cannotbelessthan":
             MessageLookupByLibrary.simpleMessage("Can not be less than"),
+        "cashback": MessageLookupByLibrary.simpleMessage("Cashback 20%"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "checkcode": MessageLookupByLibrary.simpleMessage("Check Code"),
         "checkcodecontent": MessageLookupByLibrary.simpleMessage(
@@ -51,14 +54,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your phone"),
         "enteryourusername":
             MessageLookupByLibrary.simpleMessage("Enter your username"),
+        "findproduct": MessageLookupByLibrary.simpleMessage("Find Product"),
         "forgetpasscontent": MessageLookupByLibrary.simpleMessage(
             "Please enter your email address to recive a verification code. "),
         "forgetpassword":
             MessageLookupByLibrary.simpleMessage("Forget password"),
+        "gotocart": MessageLookupByLibrary.simpleMessage("Go To Cart"),
         "gotologin": MessageLookupByLibrary.simpleMessage("Go To Login"),
         "haveanaccount":
             MessageLookupByLibrary.simpleMessage(" Have an account ? "),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "newpass": MessageLookupByLibrary.simpleMessage("New password"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notvalidemail":
             MessageLookupByLibrary.simpleMessage("Not valid email"),
         "notvalidphonenumber":
@@ -85,12 +92,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Password has been reset successfully"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+        "productforyou":
+            MessageLookupByLibrary.simpleMessage("Product for you"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "reenteryourpassword":
             MessageLookupByLibrary.simpleMessage("Re-Enter your password"),
         "resetpass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetpasscontent":
             MessageLookupByLibrary.simpleMessage("Please enter new password"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signUpcontent": MessageLookupByLibrary.simpleMessage(
             "Sign Up with your email and password or continue with social media"),
         "signin": MessageLookupByLibrary.simpleMessage(" Sign In "),

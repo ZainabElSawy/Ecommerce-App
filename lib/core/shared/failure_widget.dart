@@ -3,8 +3,8 @@ import 'package:lottie/lottie.dart';
 
 import 'custom_try_again_button.dart';
 
-class AuthFailureState extends StatelessWidget {
-  const AuthFailureState({
+class FailureWidget extends StatelessWidget {
+  const FailureWidget({
     super.key,
     required this.onPressed,
     required this.image,

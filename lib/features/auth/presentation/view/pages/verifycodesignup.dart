@@ -8,8 +8,8 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../../../core/constant/color.dart';
 import '../../../../../core/constant/imageassets.dart';
 import '../../../../../core/functions/custom_error_snack_bar.dart';
+import '../../../../../core/shared/failure_widget.dart';
 import '../../manager/verify_code_cubit/verify_code_cubit.dart';
-import '../widget/auth_failure_state.dart';
 import '../widget/customauthappbar.dart';
 import '../widget/verify_code_sign_up_content.dart';
 
@@ -36,12 +36,12 @@ class VerifyCodeSignUp extends StatelessWidget {
           if (state is VerifyCodeLoading) {
             return Center(child: Lottie.asset(AppImageAsset.loading));
           } else if (state is VerifyCodeNetworkFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: () => verifyCodeMethod(context),
               image: AppImageAsset.internet,
             );
           } else if (state is VerifyCodeServerFailure) {
-            return AuthFailureState(
+            return FailureWidget(
               onPressed: () => verifyCodeMethod(context),
               image: AppImageAsset.server,
             );

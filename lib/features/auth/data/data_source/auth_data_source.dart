@@ -17,4 +17,5 @@ abstract class AuthDataSource {
     required String email,
     required String newPassword,
   });
+  Future otpResend({required String userEmail});
 }
