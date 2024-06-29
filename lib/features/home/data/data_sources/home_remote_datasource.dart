@@ -16,6 +16,7 @@ abstract class HomeRemoteDataSource {
   Future<String> removeFromFavorite({required int userId, required int itemId});
   Future<String> removeItemFromFavorite({required int favId});
   Future<List<MyFavoriteModel>> fetchMyFavoriteItems({required int userId});
+  Future<List<ItemModel>?> search(String srch);
 }
 
 class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
@@ -33,7 +34,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   @override
   Future<List<ItemModel>> fetchItems() async {
     Map<String, dynamic> data = await apiService.get(endPoint: AppLinks.home);
-    List<ItemModel> items = getItemsList(data["items"] ?? []) ?? [];
+    List<ItemModel> items = getItemsList(data["items"]["data"] ?? []) ?? [];
     saveItemsData(items, kItems);
     return items;
   }
@@ -83,20 +84,27 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
 
     return favItems;
   }
-  
+
   @override
-  Future<String> removeItemFromFavorite({required int favId})async {
+  Future<String> removeItemFromFavorite({required int favId}) async {
     Map<String, dynamic> data =
         await apiService.post(endPoint: AppLinks.removeFromFavorite, data: {
       "favorite_id": favId,
     });
     return data["status"];
   }
+  
+  @override
+  Future<List<ItemModel>?> search(String srch)async {
+    Map<String, dynamic> data = await apiService.post(endPoint: AppLinks.search, data: {"search":srch});
+    List<ItemModel>? items =data["status"]=="success"? getItemsList(data["data"]) : [];
+    return items;
+  }
 }
 
 List<CategoriesModel> getCategoriesList(Map<String, dynamic> data) {
   List<CategoriesModel> categories = [];
-  for (var cat in data["categories"]) {
+  for (var cat in data["categories"]["data"]) {
     categories.add(CategoriesModel.fromJson(cat));
   }
   return categories;
@@ -109,9 +117,10 @@ List<ItemModel>? getItemsList(List data) {
   }
   return items;
 }
+
 List<MyFavoriteModel>? getFavoriteItemsList(Map<String, dynamic> data) {
   List<MyFavoriteModel> items = [];
-  for (var item in data["data"]??[]) {
+  for (var item in data["data"] ?? []) {
     items.add(MyFavoriteModel.fromJson(item));
   }
   return items;

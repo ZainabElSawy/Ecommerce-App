@@ -71,9 +71,9 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-List<Widget> pages = const [
+List<Widget> pages = [
   Home(),
-  Text("One"),
-  Text("Two"),
-  Settings(),
+  const Text("One"),
+  const Text("Two"),
+  const Settings(),
 ];

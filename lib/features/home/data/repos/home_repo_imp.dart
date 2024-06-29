@@ -173,5 +173,26 @@ class HomeRepoImp implements HomeRepo {
       return left(NetworkFailure('No internet connection'));
     }
   }
+  
+  @override
+  Future<Either<Failure, List<ItemModel>?>> search(String srch)async{
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        List<ItemModel>? items;
+        items = await homeRemoteDataSource.search(srch);
+        return right(items);
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
 
 }

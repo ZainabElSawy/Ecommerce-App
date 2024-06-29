@@ -13,4 +13,6 @@ abstract class HomeRepo {
   Future<Either<Failure, String>> removeFromFavorite({required int itemId});
   Future<Either<Failure, String>> removeItemFromFavorite({required int favId});
   Future<Either<Failure, List<MyFavoriteModel>>> fetchMyFavoriteItems();
+  Future<Either<Failure, List<ItemModel>?>> search(String srch);
+
 }

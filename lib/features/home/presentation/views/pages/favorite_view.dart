@@ -17,13 +17,13 @@ class FavoriteView extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 10),
-              child: CustomAppBar(
-                searchTitle: S.of(context).findproduct,
-                onNotificationPressed: () {},
-                onFavoritePressed: () =>
-                    context.pushPage(route: AppRouter.favorite),
-                onSearchPressed: () {},
-              ),
+              // child: CustomAppBar(
+              //   searchTitle: S.of(context).findproduct,
+              //   onNotificationPressed: () {},
+              //   onFavoritePressed: () =>
+              //       context.pushPage(route: AppRouter.favorite),
+              //   onSearchPressed: () {},
+              // ),
             ),
             const SizedBox(height: 10),
             const CustomMyFavoriteItemsGridView()

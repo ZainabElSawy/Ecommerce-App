@@ -27,13 +27,13 @@ class Items extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: ListView(
           children: [
-            CustomAppBar(
-              searchTitle: S.of(context).findproduct,
-              onNotificationPressed: () {},
-              onFavoritePressed: () =>
-                  context.pushPage(route: AppRouter.favorite),
-              onSearchPressed: () {},
-            ),
+            // CustomAppBar(
+            //   searchTitle: S.of(context).findproduct,
+            //   onNotificationPressed: () {},
+            //   onFavoritePressed: () =>
+            //       context.pushPage(route: AppRouter.favorite),
+            //   onSearchPressed: () {},
+            // ),
             const SizedBox(height: 10),
             ListOfCategoriesItems(categories: categories),
             const CustomItemsGridView()
