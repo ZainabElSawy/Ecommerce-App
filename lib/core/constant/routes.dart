@@ -5,6 +5,9 @@ import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpasswo
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/verifycode.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/signup.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/success_signup.dart';
+import 'package:ecommerce_app/features/cart/data/datasources/cart_data_source.dart';
+import 'package:ecommerce_app/features/cart/data/repositories/cart_repo_imp.dart';
+import 'package:ecommerce_app/features/cart/presentation/manager/cubit/cart_cubit.dart';
 import 'package:ecommerce_app/features/home/data/models/categories_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/pages/cart.dart';
 import 'package:ecommerce_app/features/home/presentation/views/pages/items_view.dart';
@@ -96,7 +99,12 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: cart,
-        builder: (context, state) => const Cart(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              CartCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio()))))
+                ..fetchCartView(),
+          child: const Cart(),
+        ),
       ),
       GoRoute(
         path: items,

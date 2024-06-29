@@ -27,6 +27,7 @@ abstract class AppLinks {
 
   //======================= Items =======================
   static const String items = "$serverPhone/items/items.php";
+  static const String search = "$serverPhone/items/search.php";
   //====================================================
 
   //======================= Favorite =======================

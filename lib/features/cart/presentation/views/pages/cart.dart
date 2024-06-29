@@ -1,51 +1,62 @@
+import 'package:ecommerce_app/features/cart/presentation/manager/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/core/constant/imageassets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../../../../core/shared/failure_widget.dart';
 import '../widgets/cart/cart_appbar.dart';
-import '../widgets/cart/custom_bottom_navigation_bar_cart.dart';
-import '../widgets/cart/custom_items_cart.dart';
-import '../widgets/cart/top_card_cart.dart';
+import '../widgets/cart/custom_cart_content.dart';
 
-class Cart extends StatelessWidget {
+class Cart extends StatefulWidget {
   const Cart({super.key});
 
+  @override
+  State<Cart> createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            const CartAppBar(title: "Cart"),
-            const SizedBox(height: 10),
-            const TopCardCart(text: "You Have 2 Items in Your List"),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Column(
-                children: [
-                  CustomitemsCart(
-                    image: AppImageAsset.logo,
-                    name: "Macbook M2 Max",
-                    price: '300.00 \$',
-                    count: "5",
-                  ),
-                  CustomitemsCart(
-                    image: AppImageAsset.logo,
-                    name: "Macbook M2 Max",
-                    price: '1500.00 \$',
-                    count: "1",
-                  ),
-                ],
-              ),
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(
+              child: CartAppBar(title: "Cart"),
             ),
+            SliverFillRemaining(
+              child: BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoading) {
+                    return Center(child: Lottie.asset(AppImageAsset.loading));
+                  } else if (state is CartNetworkFailure) {
+                    return FailureWidget(
+                      onPressed: cartMethod,
+                      image: AppImageAsset.internet,
+                    );
+                  } else if (state is CartServerFailure) {
+                    return FailureWidget(
+                      onPressed: cartMethod,
+                      image: AppImageAsset.server,
+                    );
+                  } else if (state is CartSuccess) {
+                    return CustomCartContent(cartModel: state.cartModel);
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            )
           ],
         ),
       ),
-      bottomNavigationBar: const CustomButtomNavigationbarCart(
-        price: "1200 \$",
-        shipping: "1200 \$",
-        totalPrice: "1200 \$",
-      ),
     );
   }
+
+  cartMethod() {
+    BlocProvider.of<CartCubit>(context).fetchCartView();
+  }
 }
+

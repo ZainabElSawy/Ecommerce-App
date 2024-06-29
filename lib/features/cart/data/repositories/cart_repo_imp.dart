@@ -6,6 +6,7 @@ import 'package:ecommerce_app/main.dart';
 import '../../../../core/errors/failure.dart';
 import '../../domain/repositories/cart_repo.dart';
 import '../datasources/cart_data_source.dart';
+import '../models/cart_model.dart';
 
 class CartRepoImp implements CartRepo {
   final CartDataSource cartDataSource;
@@ -52,15 +53,11 @@ class CartRepoImp implements CartRepo {
   }
 
   @override
-  Future<Either<Failure, String>> viewCart({required int favId}) async {
+  Future<Either<Failure, CartModel>> viewCart() async {
     try {
-      String status = await cartDataSource.viewCart(favId: favId);
-      if (status == "success") {
-        return right(status);
-      } else {
-        return left(
-            ServerFailure("Something went wrong ,please try again later!"));
-      }
+
+      CartModel cartModel = await cartDataSource.viewCart(userId: sharedPreferences!.getInt("userid")!);
+      return right(cartModel);
     } catch (e) {
       // ignore: deprecated_member_use
       if (e is DioError) {

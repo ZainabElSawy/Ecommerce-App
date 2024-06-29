@@ -9,11 +9,15 @@ class CustomitemsCart extends StatelessWidget {
     required this.name,
     required this.price,
     required this.count,
+    this.onAdd,
+    this.onRemove,
   }) : super(key: key);
   final String image;
   final String name;
   final String price;
   final String count;
+  final void Function()? onAdd;
+  final void Function()? onRemove;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -21,9 +25,9 @@ class CustomitemsCart extends StatelessWidget {
         children: [
           Expanded(
               flex: 2,
-              child: Image.asset(
+              child: Image.network(
                 image,
-                height: 97,
+                height: 80,
                 fit: BoxFit.fill,
               )),
           Expanded(
@@ -47,7 +51,7 @@ class CustomitemsCart extends StatelessWidget {
               SizedBox(
                 height: 38,
                 child:
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+                    IconButton(onPressed: onAdd, icon: const Icon(Icons.add)),
               ),
               Container(
                 alignment: Alignment.center,
@@ -61,7 +65,7 @@ class CustomitemsCart extends StatelessWidget {
               SizedBox(
                 height: 30,
                 child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.remove)),
+                    onPressed: onRemove, icon: const Icon(Icons.remove)),
               )
             ],
           ))

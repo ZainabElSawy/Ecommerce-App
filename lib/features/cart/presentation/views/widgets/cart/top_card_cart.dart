@@ -11,6 +11,7 @@ class TopCardCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.only(top: 5),
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       height: 33,

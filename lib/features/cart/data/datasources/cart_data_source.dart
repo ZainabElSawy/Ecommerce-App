@@ -2,12 +2,13 @@ import 'dart:developer';
 
 import 'package:ecommerce_app/core/constant/linkapi.dart';
 import '../../../../core/services/api_services.dart';
+import '../models/cart_model.dart';
 
 abstract class CartDataSource {
   Future<String> addToCart({required int userId, required int itemId});
   Future<String> removeFromCart({required int userId, required int itemId});
   Future<String> itemsCountCart({required int userId, required int itemId});
-  Future<String> viewCart({required int favId});
+  Future<CartModel> viewCart({required int userId});
 }
 
 class CartDataSourceImp extends CartDataSource {
@@ -43,12 +44,12 @@ class CartDataSourceImp extends CartDataSource {
   }
 
   @override
-  Future<String> viewCart({required int favId}) async {
+  Future<CartModel> viewCart({required int userId}) async {
     Map<String, dynamic> data =
-        await apiService.post(endPoint: AppLinks.removeFromFavorite, data: {
-      "favorite_id": favId,
+        await apiService.post(endPoint: AppLinks.cartView, data: {
+      "usersid": userId,
     });
-    return data["status"];
+    return  CartModel.fromJson(data);
   }
 
   @override
