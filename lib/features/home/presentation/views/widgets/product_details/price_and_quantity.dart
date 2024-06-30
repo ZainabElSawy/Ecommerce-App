@@ -7,10 +7,12 @@ import '../../../../../../core/constant/color.dart';
 class PriceAndQuantity extends StatefulWidget {
   final int itemId;
   final int price;
+  final int discountPrice;
   const PriceAndQuantity({
     Key? key,
     required this.price,
     required this.itemId,
+    required this.discountPrice,
   }) : super(key: key);
 
   @override
@@ -74,9 +76,27 @@ class _PriceAndQuantityState extends State<PriceAndQuantity> {
             icon: const Icon(Icons.remove)),
       ]),
       const Spacer(),
-      Text(
-        "${widget.price} \$",
-        style: const TextStyle(color: AppColor.primarycolor, fontSize: 30),
+      Row(
+        children: [
+          Text(
+            "${widget.discountPrice} \$",
+            style: const TextStyle(color: AppColor.primarycolor, fontSize: 30),
+          ),
+          const SizedBox(width: 5),
+          (widget.discountPrice != widget.price)
+              ? Text(
+                  "${widget.price} \$",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: AppColor.grey,
+                    fontFamily: "sans",
+                    decoration:
+                        TextDecoration.lineThrough, // إضافة الخط على النص
+                  ),
+                )
+              : Container(),
+        ],
       ),
     ]);
   }

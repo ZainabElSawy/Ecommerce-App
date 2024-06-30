@@ -45,6 +45,7 @@ class ProductDetails extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               PriceAndQuantity(
+                discountPrice: itemModel.itemsPriceDiscount ?? 0,
                 price: itemModel.itemsPrice ?? 0,
                 itemId: itemModel.itemsId!,
               ),

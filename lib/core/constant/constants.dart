@@ -1,3 +1,3 @@
-const String kUser="userBox";
-const String kCategories="categoriesBox";
-const String kItems="itemsBox";
+const String kUser = "userBoxx";
+const String kCategories = "categoriesBoxx";
+const String kItems = "itemsBoxx";

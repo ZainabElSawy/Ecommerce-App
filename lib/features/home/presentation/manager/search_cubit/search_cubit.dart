@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../../core/errors/failure.dart';
 import '../../../data/models/item_model.dart';
@@ -10,7 +10,8 @@ part 'search_state.dart';
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.homeRepo) : super(SearchInitial());
   HomeRepo homeRepo;
-  
+    final TextEditingController textEditingController = TextEditingController();
+
   fetchSearch(String srch) async {
     emit(SearchLoading());
     var result = await homeRepo.search(srch);

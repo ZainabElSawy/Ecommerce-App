@@ -15,24 +15,27 @@ class MyFavoriteModel {
   String? itemsDate;
   int? itemsCat;
   int? usersId;
+  int? itemsPriceDiscount;
 
-  MyFavoriteModel(
-      {this.favoriteId,
-      this.favoriteUsersid,
-      this.favoriteItemsid,
-      this.itemsId,
-      this.itemsName,
-      this.itemsNameAr,
-      this.itemsDesc,
-      this.itemsDescAr,
-      this.itemsImage,
-      this.itemsCount,
-      this.itemsActive,
-      this.itemsPrice,
-      this.itemsDiscount,
-      this.itemsDate,
-      this.itemsCat,
-      this.usersId});
+  MyFavoriteModel({
+    this.favoriteId,
+    this.favoriteUsersid,
+    this.favoriteItemsid,
+    this.itemsId,
+    this.itemsName,
+    this.itemsNameAr,
+    this.itemsDesc,
+    this.itemsDescAr,
+    this.itemsImage,
+    this.itemsCount,
+    this.itemsActive,
+    this.itemsPrice,
+    this.itemsDiscount,
+    this.itemsDate,
+    this.itemsCat,
+    this.usersId,
+    this.itemsPriceDiscount,
+  });
 
   MyFavoriteModel.fromJson(Map<String, dynamic> json) {
     favoriteId = json['favorite_id'];
@@ -51,6 +54,7 @@ class MyFavoriteModel {
     itemsDate = json['items_date'];
     itemsCat = json['items_cat'];
     usersId = json['users_id'];
+    itemsPriceDiscount = json['itemspricediscount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -71,6 +75,7 @@ class MyFavoriteModel {
     data['items_date'] = itemsDate;
     data['items_cat'] = itemsCat;
     data['users_id'] = usersId;
+    data['itemspricediscount'] = itemsPriceDiscount;
     return data;
   }
 }

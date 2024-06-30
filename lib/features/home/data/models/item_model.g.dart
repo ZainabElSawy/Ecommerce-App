@@ -35,13 +35,14 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
       categoriesImage: fields[15] as String?,
       categoriesDatetime: fields[16] as String?,
       favorite: fields[17] as int?,
+      itemsPriceDiscount: fields[18] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ItemModel obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.itemsId)
       ..writeByte(1)
@@ -77,7 +78,9 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
       ..writeByte(16)
       ..write(obj.categoriesDatetime)
       ..writeByte(17)
-      ..write(obj.favorite);
+      ..write(obj.favorite)
+      ..writeByte(18)
+      ..write(obj.itemsPriceDiscount);
   }
 
   @override

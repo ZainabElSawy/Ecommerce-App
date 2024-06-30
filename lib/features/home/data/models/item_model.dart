@@ -39,6 +39,8 @@ class ItemModel {
   String? categoriesDatetime;
   @HiveField(17)
   int? favorite;
+  @HiveField(18)
+  int? itemsPriceDiscount;
 
   ItemModel(
       {this.itemsId,
@@ -58,7 +60,7 @@ class ItemModel {
       this.categoriesNameAr,
       this.categoriesImage,
       this.categoriesDatetime,
-      this.favorite});
+      this.favorite,this.itemsPriceDiscount});
 
   ItemModel.fromJson(Map<String, dynamic> json) {
     itemsId = json['items_id'];
@@ -79,6 +81,7 @@ class ItemModel {
     categoriesImage = json['categories_image'];
     categoriesDatetime = json['categories_datetime'];
     favorite = json['favorite'];
+    itemsPriceDiscount = json['itemspricediscount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -101,6 +104,7 @@ class ItemModel {
     data['categories_image'] = categoriesImage;
     data['categories_datetime'] = categoriesDatetime;
     data['favorite'] = favorite;
+    data['itemspricediscount'] = itemsPriceDiscount;
     return data;
   }
 }

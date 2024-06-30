@@ -31,6 +31,11 @@ class CustomCartContent extends StatelessWidget {
                 : ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (ctx, index) => CustomitemsCart(
+                      onTap: () {
+                        // context.pushPage(
+                        //     route: AppRouter.productDetails,
+                        //     extra: cartModel.cartItems[index]);
+                      },
                       onAdd: () {
                         BlocProvider.of<AddtoCartCubit>(context).addToCart(
                             itemId: cartModel.cartItems[index].itemsId);

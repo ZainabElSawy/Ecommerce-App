@@ -15,8 +15,7 @@ import '../widgets/home/list_of_categories.dart';
 import '../widgets/home/list_of_items.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key});
-  final TextEditingController textEditingController = TextEditingController();
+  const Home({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,19 +25,22 @@ class Home extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: CustomAppBar(
-              textEditingController: textEditingController,
+              textEditingController:
+                  BlocProvider.of<SearchCubit>(context).textEditingController,
               onChanged: (srchText) =>
                   BlocProvider.of<SearchCubit>(context).fetchSearch(srchText),
               searchTitle: S.of(context).findproduct,
-              onNotificationPressed: () {},
               onFavoritePressed: () =>
                   context.pushPage(route: AppRouter.favorite),
-              onSearchPressed: () {},
             ),
           ),
           BlocBuilder<SearchCubit, SearchState>(
             builder: (context, state) {
-              if (state is SearchSuccess && textEditingController.text != '') {
+              if (state is SearchSuccess &&
+                  BlocProvider.of<SearchCubit>(context)
+                          .textEditingController
+                          .text !=
+                      '') {
                 if (state.items!.isNotEmpty) {
                   return ListItemsSearch(itemsModel: state.items!);
                 }
