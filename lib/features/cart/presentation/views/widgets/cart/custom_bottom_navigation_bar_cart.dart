@@ -1,73 +1,35 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constant/color.dart';
-import 'button_cart.dart';
+import 'custom_button_cart.dart';
+import 'custom_coupon_widget.dart';
+import 'custom_total_price_widget.dart';
 
 class CustomButtomNavigationbarCart extends StatelessWidget {
   const CustomButtomNavigationbarCart({
     Key? key,
     required this.price,
     required this.totalPrice,
+    required this.discount,
+    required this.controllercoupon,
+    this.onApplyCoupon,
     required this.shipping,
   }) : super(key: key);
   final String price;
   final String totalPrice;
+  final String discount;
   final String shipping;
+  final TextEditingController controllercoupon;
+  final void Function()? onApplyCoupon;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("Price", style: TextStyle(fontSize: 16)),
-              Text(price, style: const TextStyle(fontSize: 16)),
-            ],
-          ),
-        ),
-         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("Shipping", style: TextStyle(fontSize: 16)),
-              Text(shipping, style: const TextStyle(fontSize: 16)),
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25),
-          child: Divider(),
-        ),
-         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Total Price",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColor.primarycolor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                totalPrice,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: AppColor.primarycolor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
+        CustomCouponWidget(controllercoupon: controllercoupon, onApplyCoupon: onApplyCoupon),
+        CustomTotalPriceWidget(price: price, discount: discount, shipping: shipping, totalPrice: totalPrice),
         CustomButtonCart(textbutton: 'Place Order', onPressed: () {})
       ],
     );
   }
 }
+

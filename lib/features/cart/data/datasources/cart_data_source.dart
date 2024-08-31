@@ -9,6 +9,7 @@ abstract class CartDataSource {
   Future<String> removeFromCart({required int userId, required int itemId});
   Future<String> itemsCountCart({required int userId, required int itemId});
   Future<CartModel> viewCart({required int userId});
+  Future<Map<String, dynamic>> checkCoupon({required String couponName});
 }
 
 class CartDataSourceImp extends CartDataSource {
@@ -49,7 +50,7 @@ class CartDataSourceImp extends CartDataSource {
         await apiService.post(endPoint: AppLinks.cartView, data: {
       "usersid": userId,
     });
-    return  CartModel.fromJson(data);
+    return CartModel.fromJson(data);
   }
 
   @override
@@ -62,30 +63,16 @@ class CartDataSourceImp extends CartDataSource {
       "cart_usersid": userId,
       "cart_itemsid": itemId,
     });
-    log("${data["data"]}");
     return data["data"].toString();
   }
+
+  @override
+  Future<Map<String, dynamic>> checkCoupon({required String couponName}) async {
+    Map<String, dynamic> data =
+        await apiService.post(endPoint: AppLinks.checkcoupon, data: {
+      "coupon_name": couponName,
+    });
+    log("$data");
+    return data;
+  }
 }
-
-// List<CategoriesModel> getCategoriesList(Map<String, dynamic> data) {
-//   List<CategoriesModel> categories = [];
-//   for (var cat in data["categories"]) {
-//     categories.add(CategoriesModel.fromJson(cat));
-//   }
-//   return categories;
-// }
-
-// List<ItemModel>? getItemsList(List data) {
-//   List<ItemModel> items = [];
-//   for (var item in data) {
-//     items.add(ItemModel.fromJson(item));
-//   }
-//   return items;
-// }
-// List<MyFavoriteModel>? getFavoriteItemsList(Map<String, dynamic> data) {
-//   List<MyFavoriteModel> items = [];
-//   for (var item in data["data"]??[]) {
-//     items.add(MyFavoriteModel.fromJson(item));
-//   }
-//   return items;
-// }

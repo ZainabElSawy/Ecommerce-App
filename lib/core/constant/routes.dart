@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/features/address/presentation/view/pages/add.dart';
+import 'package:ecommerce_app/features/address/presentation/view/pages/view.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/check_email.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/resetpassword.dart';
 import 'package:ecommerce_app/features/auth/presentation/view/pages/forgetpassword/success_resetpassword.dart';
@@ -7,18 +9,20 @@ import 'package:ecommerce_app/features/auth/presentation/view/pages/signup.dart'
 import 'package:ecommerce_app/features/auth/presentation/view/pages/success_signup.dart';
 import 'package:ecommerce_app/features/cart/data/datasources/cart_data_source.dart';
 import 'package:ecommerce_app/features/cart/data/repositories/cart_repo_imp.dart';
-import 'package:ecommerce_app/features/cart/presentation/manager/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:ecommerce_app/features/home/data/models/categories_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/pages/cart.dart';
 import 'package:ecommerce_app/features/home/presentation/views/pages/items_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/pages/product_details_view.dart';
 
 import 'package:ecommerce_app/features/onboarding/presentation/views/pages/onboarding.dart';
+import 'package:ecommerce_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 
+import '../../features/address/presentation/view/pages/add_details.dart';
 import '../../features/auth/data/models/user_model.dart';
 import '../../features/auth/presentation/view/pages/login.dart';
 import '../../features/auth/presentation/view/pages/verifycodesignup.dart';
@@ -31,7 +35,6 @@ import '../../features/home/presentation/views/pages/favorite_view.dart';
 import '../../features/home/presentation/views/pages/home_page.dart';
 import '../../features/language/presentation/views/pages/language.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit/on_boarding_cubit.dart';
-import '../../main.dart';
 import '../services/api_services.dart';
 
 abstract class AppRouter {
@@ -49,6 +52,12 @@ abstract class AppRouter {
   static const String productDetails = "/productdetails";
   static const String favorite = "/favorite";
   static const String cart = "/cart";
+
+  //address
+  static const String addressesView = "/AddressesView";
+  static const String addressesAdd = "/AddressesAdd";
+  static const String addressesDetails = "/AddressesDetails";
+
   static final route = GoRouter(
     routes: [
       //Language
@@ -59,7 +68,7 @@ abstract class AppRouter {
             : sharedPreferences?.getString("onboarding") == null
                 ? const Language()
                 : const Login(),
-        // builder: (context, state) => const Language(),
+        //builder: (context, state) => AddressView(),
       ),
       //OnBoarding
       GoRoute(
@@ -123,17 +132,33 @@ abstract class AppRouter {
             ProductDetails(itemModel: state.extra as ItemModel),
       ),
       GoRoute(
-          path: favorite,
-          builder: (context, state) => BlocProvider<MyFavoriteItemsCubit>(
-                create: (BuildContext context) => MyFavoriteItemsCubit(
-                    HomeRepoImp(
-                        homeRemoteDataSource:
-                            HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-                        homeLocalDataSource:
-                            HomeLocalDataSourceImp(ApiService(dio: Dio()))))
-                  ..fetchMyFavoriteItems(),
-                child: const FavoriteView(),
-              )),
+        path: favorite,
+        builder: (context, state) => BlocProvider<MyFavoriteItemsCubit>(
+          create: (BuildContext context) => MyFavoriteItemsCubit(HomeRepoImp(
+              homeRemoteDataSource:
+                  HomeRemoteDataSourceImp(ApiService(dio: Dio())),
+              homeLocalDataSource:
+                  HomeLocalDataSourceImp(ApiService(dio: Dio()))))
+            ..fetchMyFavoriteItems(),
+          child: const FavoriteView(),
+        ),
+      ),
+      //address
+      GoRoute(
+        path: addressesView,
+        builder: (context, state) => const AddressView(),
+      ),
+      GoRoute(
+        path: addressesAdd,
+        builder: (context, state) => const AddressAdd(),
+      ),
+      GoRoute(
+        path: addressesDetails,
+        builder: (context, state) => AddressAddDetails(
+          lat: (state.extra as Map<String, dynamic>?)?["lat"] as double,
+          long: (state.extra as Map<String, dynamic>?)?["long"] as double,
+        ),
+      ),
     ],
   );
 }

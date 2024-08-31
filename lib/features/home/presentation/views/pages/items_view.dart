@@ -11,9 +11,9 @@ import '../../../data/models/categories_model.dart';
 import '../../manager/search_cubit/search_cubit.dart';
 import '../widgets/home/custom_home_app_bar.dart';
 
+import '../widgets/home/list_items_search.dart';
 import '../widgets/items/custom_items_grid_view.dart';
 import '../widgets/items/list_of_categories_item.dart';
-import 'home_view.dart';
 
 class Items extends StatelessWidget {
   final List<CategoriesModel> categories;

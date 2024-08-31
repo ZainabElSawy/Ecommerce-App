@@ -22,6 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "adddetailsaddress":
+            MessageLookupByLibrary.simpleMessage("Add Details Address"),
+        "addnewaddress":
+            MessageLookupByLibrary.simpleMessage("Add New Address"),
+        "address": MessageLookupByLibrary.simpleMessage("Address"),
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
         "asummersurprise":
             MessageLookupByLibrary.simpleMessage("A summer surprise"),
@@ -38,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkcodecontent": MessageLookupByLibrary.simpleMessage(
             "Please enter the digit code sent to"),
         "checkemail": MessageLookupByLibrary.simpleMessage("Check Email"),
+        "city": MessageLookupByLibrary.simpleMessage("City"),
+        "complete": MessageLookupByLibrary.simpleMessage("Complete"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "congratulations":
             MessageLookupByLibrary.simpleMessage("Congratulations"),
@@ -64,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "haveanaccount":
             MessageLookupByLibrary.simpleMessage(" Have an account ? "),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newpass": MessageLookupByLibrary.simpleMessage("New password"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notvalidemail":
@@ -110,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signintitle": MessageLookupByLibrary.simpleMessage("Welcome Back"),
         "signup": MessageLookupByLibrary.simpleMessage(" Sign Up "),
         "signuptitle": MessageLookupByLibrary.simpleMessage("Welcome here!"),
+        "street": MessageLookupByLibrary.simpleMessage("Street"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
         "successfullyregistered":
             MessageLookupByLibrary.simpleMessage("Successfully Registered"),

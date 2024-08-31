@@ -92,5 +92,16 @@
     "profile":"الشخصية",
     "notification":"الاشعارات",
 
-    "gotocart":"اذهب الي العربة"
+    "gotocart":"اذهب الي العربة",
+
+    "address":"العنوان",
+    "complete":"أكمل",
+    "addnewaddress":"اضافه عنوان جديد",
+    "adddetailsaddress":"اضافه تفاصيل العنوان",
+
+    "city":"المدينه",
+    "street":"الشارع",
+    "name":"الاسم",
+    "add":"أضف"
+    
 }

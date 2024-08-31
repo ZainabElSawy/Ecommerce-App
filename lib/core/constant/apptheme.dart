@@ -4,6 +4,22 @@ import 'color.dart';
 
 ThemeData themeEnglish = ThemeData(
     fontFamily: "PlayfairDisplay",
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColor.primarycolor,
+      foregroundColor: AppColor.white,
+    ),
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      elevation: 0,
+      iconTheme: const IconThemeData(color: AppColor.primarycolor),
+      titleTextStyle: const TextStyle(
+        color: AppColor.primarycolor,
+        fontWeight: FontWeight.bold,
+        fontSize: 25,
+        fontFamily: "PlayfairDisplay",
+      ),
+      foregroundColor: Colors.grey[50],
+    ),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(
           fontWeight: FontWeight.w800, fontSize: 22, color: AppColor.black),
@@ -24,6 +40,22 @@ ThemeData themeEnglish = ThemeData(
     ));
 ThemeData themeArabic = ThemeData(
     fontFamily: "Cairo",
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColor.primarycolor,
+      foregroundColor: AppColor.white,
+    ),
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      elevation: 0,
+      iconTheme: const IconThemeData(color: AppColor.primarycolor),
+      titleTextStyle: const TextStyle(
+        color: AppColor.primarycolor,
+        fontWeight: FontWeight.bold,
+        fontSize: 25,
+        fontFamily: "Cairo",
+      ),
+      foregroundColor: Colors.grey[50],
+    ),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(
           fontWeight: FontWeight.w800, fontSize: 22, color: AppColor.black),

@@ -98,5 +98,15 @@
     "profile":"Profile",
     "notification":"Notification",
 
-    "gotocart":"Go To Cart"
+    "gotocart":"Go To Cart",
+    
+    "address":"Address",
+    "complete":"Complete",
+    "addnewaddress":"Add New Address",
+    "adddetailsaddress":"Add Details Address",
+
+    "city":"City",
+    "street":"Street",
+    "name":"Name",
+    "add":"Add"
 }

@@ -1,6 +1,8 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/features/cart/data/models/coupon_model.dart';
 import 'package:ecommerce_app/main.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -55,8 +57,8 @@ class CartRepoImp implements CartRepo {
   @override
   Future<Either<Failure, CartModel>> viewCart() async {
     try {
-
-      CartModel cartModel = await cartDataSource.viewCart(userId: sharedPreferences!.getInt("userid")!);
+      CartModel cartModel = await cartDataSource.viewCart(
+          userId: sharedPreferences!.getInt("userid")!);
       return right(cartModel);
     } catch (e) {
       // ignore: deprecated_member_use
@@ -79,6 +81,33 @@ class CartRepoImp implements CartRepo {
         return left(ServerFailure.fromDioError(e));
       }
       return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CouponModel>> checkCoupon(
+      {required String couponName}) async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        Map<String, dynamic> data =
+            await cartDataSource.checkCoupon(couponName: couponName);
+        if (data["status"] == "success") {
+          return right(CouponModel.fromJson(data["data"]));
+        } else {
+          return left(
+              DataFailure("This coupon does not exist or may be expired !"));
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
     }
   }
 }

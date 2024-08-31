@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/cart/presentation/manager/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/core/constant/imageassets.dart';
@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../core/shared/failure_widget.dart';
 import '../widgets/cart/cart_appbar.dart';
-import '../widgets/cart/custom_cart_content.dart';
+import '../widgets/cart/custom_cart_builder.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -42,7 +42,7 @@ class _CartState extends State<Cart> {
                       image: AppImageAsset.server,
                     );
                   } else if (state is CartSuccess) {
-                    return CustomCartContent(cartModel: state.cartModel);
+                    return CustomCartBuilder(cartModel: state.cartModel);
                   } else {
                     return Container();
                   }

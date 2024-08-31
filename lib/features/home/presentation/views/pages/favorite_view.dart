@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/features/home/presentation/views/pages/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -9,6 +8,7 @@ import '../../../../../generated/l10n.dart';
 import '../../manager/search_cubit/search_cubit.dart';
 import '../widgets/favorite_items/custom_fav_items_gridview.dart';
 import '../widgets/home/custom_home_app_bar.dart';
+import '../widgets/home/list_items_search.dart';
 
 class FavoriteView extends StatelessWidget {
   const FavoriteView({super.key});

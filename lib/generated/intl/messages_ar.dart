@@ -22,6 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("أضف"),
+        "adddetailsaddress":
+            MessageLookupByLibrary.simpleMessage("اضافه تفاصيل العنوان"),
+        "addnewaddress":
+            MessageLookupByLibrary.simpleMessage("اضافه عنوان جديد"),
+        "address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "alert": MessageLookupByLibrary.simpleMessage("تنبيه"),
         "asummersurprise": MessageLookupByLibrary.simpleMessage("مفاجأة الصيف"),
         "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
@@ -38,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرجاء إدخال رمز الرقم المرسل إلى"),
         "checkemail":
             MessageLookupByLibrary.simpleMessage("تفقد البريد الإلكتروني"),
+        "city": MessageLookupByLibrary.simpleMessage("المدينه"),
+        "complete": MessageLookupByLibrary.simpleMessage("أكمل"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "congratulations": MessageLookupByLibrary.simpleMessage("تهانينا"),
         "donthaveanaccount":
@@ -63,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الذهاب إلي تسجيل الدخول"),
         "haveanaccount": MessageLookupByLibrary.simpleMessage(" لديك حساب ؟ "),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "newpass": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
         "notification": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "notvalidemail":
@@ -106,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signintitle": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signuptitle": MessageLookupByLibrary.simpleMessage("مرحبًا بك هنا"),
+        "street": MessageLookupByLibrary.simpleMessage("الشارع"),
         "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
         "successfullyregistered":
             MessageLookupByLibrary.simpleMessage("تم تسجيل حساب جديد بنجاح !"),

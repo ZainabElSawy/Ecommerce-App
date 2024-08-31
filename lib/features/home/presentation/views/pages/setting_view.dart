@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/core/constant/imageassets.dart';
+import 'package:ecommerce_app/core/constant/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/functions/alert_log_out.dart';
@@ -54,7 +55,9 @@ class Settings extends StatelessWidget {
                 ListTile(
                   title: const Text("Address"),
                   trailing: const Icon(Icons.location_on_outlined),
-                  onTap: () {},
+                  onTap: () {
+                    context.pushPage(route: AppRouter.addressesView);
+                  },
                 ),
                 ListTile(
                   title: const Text("About us"),
@@ -81,4 +84,3 @@ class Settings extends StatelessWidget {
     );
   }
 }
-

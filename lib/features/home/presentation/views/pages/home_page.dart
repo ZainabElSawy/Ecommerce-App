@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/features/home/presentation/views/pages/home_view.dart';
 
+import '../../../../../core/functions/request_per_location.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../domain/entities/custom_app_bar_button_model.dart';
 import '../widgets/home/custom_button_app_bar.dart';
@@ -18,6 +19,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+   @override
+  void initState() {
+    requestPerLocation(context);
+    super.initState();
+  }
+
   int currentPage = 0;
   @override
   Widget build(BuildContext context) {
@@ -72,8 +79,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 List<Widget> pages = [
-  Home(),
+  const Home(),
   const Text("One"),
   const Text("Two"),
   const Settings(),
 ];
+
+

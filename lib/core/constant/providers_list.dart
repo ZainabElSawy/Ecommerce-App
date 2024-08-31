@@ -1,8 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/features/address/data/datasources/address_data_source_imp.dart';
+import 'package:ecommerce_app/features/cart/presentation/manager/coupon_cubit/coupon_cubit.dart';
 import 'package:ecommerce_app/features/home/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/address/data/repositories/address_repo_imp.dart';
+import '../../features/address/presentation/manager/add_delete_address_cubit/address_cubit.dart';
+import '../../features/address/presentation/manager/view_address_cubit/view_address_cubit.dart';
 import '../../features/auth/data/data_source/auth_data_source_imp.dart';
 import '../../features/auth/data/repos/auth_repo_imp.dart';
 import '../../features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
@@ -11,7 +16,7 @@ import '../../features/auth/presentation/manager/signup_cubit/signup_cubit.dart'
 import '../../features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
 import '../../features/cart/data/datasources/cart_data_source.dart';
 import '../../features/cart/data/repositories/cart_repo_imp.dart';
-import '../../features/cart/presentation/manager/cubit/cart_cubit.dart';
+import '../../features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import '../../features/home/data/data_sources/home_local_datasource.dart';
 import '../../features/home/data/data_sources/home_remote_datasource.dart';
 import '../../features/home/data/repos/home_repo_imp.dart';
@@ -25,6 +30,14 @@ import '../../features/language/presentation/view_models/locale_cubit/locale_cub
 import '../services/api_services.dart';
 
 List<BlocProvider<dynamic>> providersList = [
+  BlocProvider<AddressCubit>(
+    create: (BuildContext context) => AddressCubit(
+        AddressRepoImp(AddressDataSourceImp(ApiService(dio: Dio())))),
+  ),
+  BlocProvider<ViewAddressCubit>(
+    create: (BuildContext context) => ViewAddressCubit(
+        AddressRepoImp(AddressDataSourceImp(ApiService(dio: Dio())))),
+  ),
   BlocProvider<LocaleCubit>(
     create: (BuildContext context) => LocaleCubit()..getSavedLanguage(),
   ),
@@ -47,6 +60,10 @@ List<BlocProvider<dynamic>> providersList = [
   BlocProvider<CartCubit>(
     create: (BuildContext context) =>
         CartCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio())))),
+  ),
+  BlocProvider<CouponCubit>(
+    create: (BuildContext context) =>
+        CouponCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio())))),
   ),
   BlocProvider<ForgetPasswordCubit>(
     create: (BuildContext context) => ForgetPasswordCubit(
