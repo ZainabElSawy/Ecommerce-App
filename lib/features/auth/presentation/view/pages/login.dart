@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -12,8 +10,11 @@ import '../../../../../core/functions/alertexitapp.dart';
 import '../../../../../core/functions/custom_error_snack_bar.dart';
 import '../../../../../core/shared/failure_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../../main.dart';
+import '../../../../../core/functions/notification_helper.dart';
 import '../widget/customauthappbar.dart';
 import '../widget/login_content.dart';
+//import 'package:dio/dio.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -27,12 +28,8 @@ class _LoginState extends State<Login> {
   late TextEditingController password;
   @override
   void initState() {
-    FirebaseMessaging.instance.getToken().then((value) {
-      String? token = value;
-      log("***********************");
-      log("$token");
-      log("***********************");
-    });
+    getToken();
+    getAccessToken();
     email = TextEditingController();
     password = TextEditingController();
     super.initState();
@@ -59,6 +56,9 @@ class _LoginState extends State<Login> {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.user.usersApprove == 1) {
+                  FirebaseMessaging.instance.subscribeToTopic("users");
+                  FirebaseMessaging.instance.subscribeToTopic(
+                      "users${sharedPreferences!.getInt("userid")}");
                   context.pushPage(route: AppRouter.home);
                 } else {
                   context.pushReplacePage(
@@ -72,7 +72,13 @@ class _LoginState extends State<Login> {
             },
             builder: (context, state) {
               if (state is LoginLoading) {
-                return Center(child: Lottie.asset(AppImageAsset.loading));
+                return Center(
+                  child: Lottie.asset(
+                    AppImageAsset.loading,
+                    width: 300,
+                    height: 300,
+                  ),
+                );
               } else if (state is LoginNetworkFailure) {
                 return FailureWidget(
                   onPressed: loginMethod,

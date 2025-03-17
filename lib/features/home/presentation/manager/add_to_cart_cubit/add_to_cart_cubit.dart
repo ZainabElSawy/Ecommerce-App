@@ -16,12 +16,15 @@ class AddtoCartCubit extends Cubit<AddToCartState> {
   AddtoCartCubit(this.cartRepo) : super(AddtoCartInitial());
   CartRepo cartRepo;
   addToCart({required int itemId}) async {
+    log("Add to cart");
     var result = await cartRepo.addToCart(itemId: itemId);
     result.fold((failure) {
       if (failure is ServerFailure) {
+        log(failure.errorMessage);
         emit(AddToCartServerFailure(failure.errorMessage));
       }
     }, (status) {
+      log("Success");
       emit(AddToCartSuccess());
     });
   }

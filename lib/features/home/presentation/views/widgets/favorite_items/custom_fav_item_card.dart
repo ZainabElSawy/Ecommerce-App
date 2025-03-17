@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/constant/color.dart';
 import '../../../../../../core/constant/linkapi.dart';
+import '../../../../../../core/constant/routes.dart';
 import '../../../../../../core/functions/show_toast.dart';
 import '../../../../../../core/functions/translate_data_base.dart';
 import '../../../manager/my_favorite_item_cubit/my_favorite_items_cubit.dart';
@@ -22,8 +23,10 @@ class CustomFavoriteItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(8),
       onTap: () {
-        //context.pushPage(route: AppRouter.productDetails, extra: favItemModel);
+        context.pushPage(
+            route: AppRouter.favProductDetails, extra: favItemModel);
       },
       child: Card(
         color: AppColor.white,
@@ -85,16 +88,19 @@ class CustomFavoriteItemCard extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 5),
-                          Text(
-                            "${favItemModel.itemsPrice} \$",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: AppColor.grey,
-                              fontFamily: "sans",
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          ),
+                          (favItemModel.itemsDiscount != 0)
+                              ? Text(
+                                  "${favItemModel.itemsPrice} \$",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: AppColor.grey,
+                                    fontFamily: "sans",
+                                    decoration: TextDecoration
+                                        .lineThrough, // إضافة الخط على النص
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                       IconButton(
@@ -116,10 +122,13 @@ class CustomFavoriteItemCard extends StatelessWidget {
                 ],
               ),
             ),
-            Image.asset(
-              AppImageAsset.sale,
-              width: 60,
-            )
+            favItemModel.itemsDiscount != 0
+                ? Positioned(
+                    top: 4,
+                    left: 4,
+                    child: Image.asset(AppImageAsset.sale, width: 50),
+                  )
+                : Container(),
           ],
         ),
       ),

@@ -38,23 +38,23 @@ class MyFavoriteModel {
   });
 
   MyFavoriteModel.fromJson(Map<String, dynamic> json) {
-    favoriteId = json['favorite_id'];
-    favoriteUsersid = json['favorite_usersid'];
-    favoriteItemsid = json['favorite_itemsid'];
-    itemsId = json['items_id'];
-    itemsName = json['items_name'];
-    itemsNameAr = json['items_name_ar'];
-    itemsDesc = json['items_desc'];
-    itemsDescAr = json['items_desc_ar'];
-    itemsImage = json['items_image'];
-    itemsCount = json['items_count'];
-    itemsActive = json['items_active'];
-    itemsPrice = json['items_price'];
-    itemsDiscount = json['items_discount'];
-    itemsDate = json['items_date'];
-    itemsCat = json['items_cat'];
-    usersId = json['users_id'];
-    itemsPriceDiscount = json['itemspricediscount'];
+    favoriteId = int.tryParse(json['favorite_id'].toString());
+    favoriteUsersid = int.tryParse(json['favorite_usersid'].toString());
+    favoriteItemsid = int.tryParse(json['favorite_itemsid'].toString());
+    itemsId = int.tryParse(json['items_id'].toString());
+    itemsName = json['items_name'] as String?;
+    itemsNameAr = json['items_name_ar'] as String?;
+    itemsDesc = json['items_desc'] as String?;
+    itemsDescAr = json['items_desc_ar'] as String?;
+    itemsImage = json['items_image'] as String?;
+    itemsCount = int.tryParse(json['items_count'].toString());
+    itemsActive = int.tryParse(json['items_active'].toString());
+    itemsPrice = int.tryParse(json['items_price'].toString());
+    itemsDiscount = int.tryParse(json['items_discount'].toString());
+    itemsDate = json['items_date'] as String?;
+    itemsCat = int.tryParse(json['items_cat'].toString());
+    usersId = int.tryParse(json['users_id'].toString());
+    itemsPriceDiscount = int.tryParse(json['itemspricediscount'].toString());
   }
 
   Map<String, dynamic> toJson() {

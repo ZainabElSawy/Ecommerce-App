@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 part 'user_model.g.dart';
 
-
 @HiveType(typeId: 0)
 class User extends HiveObject {
   @HiveField(0)
@@ -33,13 +32,16 @@ class User extends HiveObject {
   });
 
   User.fromJson(Map<String, dynamic> json) {
-    usersId = json['users_id'];
+    // Convert 'users_id' from String to int
+    usersId = int.tryParse(json['users_id'].toString());
     usersName = json['users_name'];
     usersPassword = json['users_password'];
     usersEmail = json['users_email'];
     usersPhone = json['users_phone'];
-    usersVerifycode = json['users_verifycode'];
-    usersApprove = json['users_approve'];
+    // Convert 'users_verifycode' from String to int
+    usersVerifycode = int.tryParse(json['users_verifycode'].toString());
+    // Convert 'users_approve' from String to int
+    usersApprove = int.tryParse(json['users_approve'].toString());
     usersCreate = json['users_create'];
   }
 
@@ -56,5 +58,3 @@ class User extends HiveObject {
     return data;
   }
 }
-//write part + file name.g.dart
-// flutter packages pub run build_runner build

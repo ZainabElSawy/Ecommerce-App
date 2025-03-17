@@ -37,13 +37,14 @@ class VerifyCodeSignUpContent extends StatelessWidget {
             numberOfFields: 5,
             borderColor: AppColor.primarycolor,
             showFieldAsBox: true,
-            onCodeChanged: (String code) =>
-                context.read<VerifyCodeCubit>().verifyCode += code,
+            // onCodeChanged: (String code) =>
+            //     ,
             onSubmit: (String verificationCode) {
+              context.read<VerifyCodeCubit>().verifyCode = verificationCode;
               context.read<VerifyCodeCubit>().verifyCodeSignUp(
                   email: email,
                   verifyCode:
-                      int.parse(context.read<VerifyCodeCubit>().verifyCode));
+                      int.parse(verificationCode));
               context.read<VerifyCodeCubit>().verifyCode = "";
             },
           ),

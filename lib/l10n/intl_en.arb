@@ -45,7 +45,7 @@
     "checkemail": "Check Email",
     "check": "Check",
     "forgetpasscontent":
-        "Please enter your email address to recive a verification code. ",
+        "Please enter your email address to receive a verification code. ",
 
 
     "verifycode": "Verify Code",
@@ -82,7 +82,7 @@
 
 
     "alert": "Alert",
-    "doyouwanttoexitfromthisapp": "Are you sure you want to exit from this app ?",
+    "doyouwanttoexitfromthisapp": "Are you sure you want to exit the app ?",
     "confirm": "Confirm",
     "cancel": "Cancel",
 
@@ -90,7 +90,8 @@
     "findproduct":"Find Product",
     "asummersurprise":"A summer surprise",
     "cashback":"Cashback 20%",
-    "productforyou":"Product for you",
+    "productforyou":"Top Selling Products",
+    "producttopselling":"Top Selling Products",
 
 
     "home":"Home",

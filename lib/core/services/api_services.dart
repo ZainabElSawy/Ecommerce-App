@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 class ApiService {
   ApiService({required this.dio});
   final Dio dio;
+
   Future<Map<String, dynamic>> get({required String endPoint}) async {
     try {
       Response response = await dio.get(endPoint);

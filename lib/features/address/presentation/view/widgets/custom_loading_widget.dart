@@ -10,6 +10,7 @@ class CustomLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Lottie.asset(AppImageAsset.loading));
+    return Center(
+        child: Lottie.asset(AppImageAsset.loading, width: 300, height: 300));
   }
 }

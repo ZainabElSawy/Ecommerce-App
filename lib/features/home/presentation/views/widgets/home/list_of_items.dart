@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,12 +17,22 @@ class ListOfItems extends StatelessWidget {
     return BlocBuilder<ItemsCubit, ItemsState>(
       builder: (context, state) {
         if (state is ItemsLoading) {
-          return const Center(
-              child: CircularProgressIndicator(color: AppColor.primarycolor));
+          return const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+                child: CircularProgressIndicator(color: AppColor.primarycolor)),
+          );
         } else if (state is ItemsNetworkFailure) {
-          return const Center(child: Icon(Icons.wifi_off));
+          return const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(child: Icon(Icons.wifi_off)),
+          );
         } else if (state is ItemsServerFailure) {
-          return const Center(child: Icon(Icons.error, color: Colors.red));
+          log(state.errMessage);
+          return const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(child: Icon(Icons.error, color: Colors.red)),
+          );
         } else if (state is ItemsSuccess) {
           return ListOfItemsContent(items: state.items);
         } else {
@@ -30,4 +42,3 @@ class ListOfItems extends StatelessWidget {
     );
   }
 }
-

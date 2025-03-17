@@ -12,8 +12,8 @@ class CustomTryAgainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all<Size>(const Size(170, 45)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        fixedSize: WidgetStateProperty.all<Size>(const Size(170, 45)),
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),

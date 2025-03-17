@@ -10,7 +10,7 @@ part 'items_state.dart';
 class ItemsCubit extends Cubit<ItemsState> {
   ItemsCubit(this.homeRepo) : super(ItemsInitial());
   HomeRepo homeRepo;
-  
+
   fetchItems() async {
     emit(ItemsLoading());
     var result = await homeRepo.fetchItems();
@@ -24,5 +24,4 @@ class ItemsCubit extends Cubit<ItemsState> {
       emit(ItemsSuccess(items));
     });
   }
-
 }

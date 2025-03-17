@@ -350,10 +350,10 @@ class S {
     );
   }
 
-  /// `Please enter your email address to recive a verification code. `
+  /// `Please enter your email address to receive a verification code. `
   String get forgetpasscontent {
     return Intl.message(
-      'Please enter your email address to recive a verification code. ',
+      'Please enter your email address to receive a verification code. ',
       name: 'forgetpasscontent',
       desc: '',
       args: [],
@@ -570,10 +570,10 @@ class S {
     );
   }
 
-  /// `Are you sure you want to exit from this app ?`
+  /// `Are you sure you want to exit the app ?`
   String get doyouwanttoexitfromthisapp {
     return Intl.message(
-      'Are you sure you want to exit from this app ?',
+      'Are you sure you want to exit the app ?',
       name: 'doyouwanttoexitfromthisapp',
       desc: '',
       args: [],
@@ -630,11 +630,21 @@ class S {
     );
   }
 
-  /// `Product for you`
+  /// `Top Selling Products`
   String get productforyou {
     return Intl.message(
-      'Product for you',
+      'Top Selling Products',
       name: 'productforyou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Selling Products`
+  String get producttopselling {
+    return Intl.message(
+      'Top Selling Products',
+      name: 'producttopselling',
       desc: '',
       args: [],
     );

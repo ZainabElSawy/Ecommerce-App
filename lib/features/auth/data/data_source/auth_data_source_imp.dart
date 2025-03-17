@@ -39,6 +39,7 @@ class AuthDataSourceImp extends AuthDataSource {
   @override
   Future<dynamic> verifyCodeSignUp(
       {required String email, required int verifyCode}) async {
+    log("$verifyCode");
     var data =
         await apiService.post(endPoint: AppLinks.verifyCodeSignUp, data: {
       "users_email": email,
@@ -53,19 +54,22 @@ class AuthDataSourceImp extends AuthDataSource {
         .post(endPoint: AppLinks.checkEmail, data: {"users_email": email});
     return data;
   }
-  
+
   @override
-  Future resetPassword({required String email, required String newPassword})async {
+  Future resetPassword(
+      {required String email, required String newPassword}) async {
     var data = await apiService.post(endPoint: AppLinks.resetPass, data: {
       "users_password": newPassword,
       "users_email": email,
     });
+    log(data.toString());
     return data;
   }
-  
+
   @override
-  Future verifyCodeForgetPassword({required String email, required int verifyCode})async {
-     var data =
+  Future verifyCodeForgetPassword(
+      {required String email, required int verifyCode}) async {
+    var data =
         await apiService.post(endPoint: AppLinks.verifyCodeForgetPass, data: {
       "users_email": email,
       "users_verifycode": verifyCode,
@@ -73,11 +77,10 @@ class AuthDataSourceImp extends AuthDataSource {
     return data;
   }
 
-  
   @override
   Future otpResend({required String userEmail}) async {
-    var data = await apiService.post(endPoint: AppLinks.resendOTP, data: {"users_email": userEmail});
-    log("$data");
+    var data = await apiService
+        .post(endPoint: AppLinks.resendOTP, data: {"users_email": userEmail});
     return data;
   }
 }

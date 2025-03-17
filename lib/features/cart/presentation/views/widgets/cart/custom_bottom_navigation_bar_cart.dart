@@ -12,7 +12,7 @@ class CustomButtomNavigationbarCart extends StatelessWidget {
     required this.discount,
     required this.controllercoupon,
     this.onApplyCoupon,
-    required this.shipping,
+    required this.shipping, this.onPlaceOrder,
   }) : super(key: key);
   final String price;
   final String totalPrice;
@@ -20,16 +20,24 @@ class CustomButtomNavigationbarCart extends StatelessWidget {
   final String shipping;
   final TextEditingController controllercoupon;
   final void Function()? onApplyCoupon;
+  final void Function()? onPlaceOrder;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CustomCouponWidget(controllercoupon: controllercoupon, onApplyCoupon: onApplyCoupon),
-        CustomTotalPriceWidget(price: price, discount: discount, shipping: shipping, totalPrice: totalPrice),
-        CustomButtonCart(textbutton: 'Place Order', onPressed: () {})
+        CustomCouponWidget(
+            controllercoupon: controllercoupon, onApplyCoupon: onApplyCoupon),
+        CustomTotalPriceWidget(
+            price: price,
+            discount: discount,
+            shipping: shipping,
+            totalPrice: totalPrice),
+        CustomButtonCart(
+          textbutton: 'Place Order',
+          onPressed: onPlaceOrder,
+        )
       ],
     );
   }
 }
-

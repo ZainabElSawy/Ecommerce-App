@@ -25,4 +25,17 @@ class SearchCubit extends Cubit<SearchState> {
       emit(SearchSuccess(items));
     });
   }
+  fetchOffers() async {
+    emit(SearchLoading());
+    var result = await homeRepo.fetchOffers();
+    result.fold((failure) {
+      if (failure is ServerFailure) {
+        emit(SearchServerFailure(failure.errorMessage));
+      } else if (failure is NetworkFailure) {
+        emit(SearchNetworkFailure(failure.errorMessage));
+      }
+    }, (items) {
+      emit(SearchSuccess(items));
+    });
+  }
 }

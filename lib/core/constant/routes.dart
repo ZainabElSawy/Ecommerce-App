@@ -10,6 +10,12 @@ import 'package:ecommerce_app/features/auth/presentation/view/pages/success_sign
 import 'package:ecommerce_app/features/cart/data/datasources/cart_data_source.dart';
 import 'package:ecommerce_app/features/cart/data/repositories/cart_repo_imp.dart';
 import 'package:ecommerce_app/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/cart/presentation/views/pages/check_out.dart';
+import 'package:ecommerce_app/features/home/data/models/my_favorite_model.dart';
+import 'package:ecommerce_app/features/orders/data/model/order_model.dart';
+import 'package:ecommerce_app/features/orders/presentation/views/screens/archive.dart';
+import 'package:ecommerce_app/features/orders/presentation/views/screens/orders_details.dart';
+import 'package:ecommerce_app/features/orders/presentation/views/screens/pending.dart';
 import 'package:ecommerce_app/features/home/data/models/categories_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/pages/cart.dart';
 import 'package:ecommerce_app/features/home/presentation/views/pages/items_view.dart';
@@ -31,6 +37,7 @@ import '../../features/home/data/data_sources/home_remote_datasource.dart';
 import '../../features/home/data/models/item_model.dart';
 import '../../features/home/data/repos/home_repo_imp.dart';
 import '../../features/home/presentation/manager/my_favorite_item_cubit/my_favorite_items_cubit.dart';
+import '../../features/home/presentation/views/pages/fav_product_details.dart';
 import '../../features/home/presentation/views/pages/favorite_view.dart';
 import '../../features/home/presentation/views/pages/home_page.dart';
 import '../../features/language/presentation/views/pages/language.dart';
@@ -50,8 +57,15 @@ abstract class AppRouter {
   static const String home = "/home";
   static const String items = "/items";
   static const String productDetails = "/productdetails";
+  static const String favProductDetails = "/favProductdetails";
   static const String favorite = "/favorite";
   static const String cart = "/cart";
+  static const String checkout = "/checkout";
+  static const String archive = "/archive";
+
+  //Orders
+  static const String orderDetails = "/orderdetails";
+  static const String pending = "/pending";
 
   //address
   static const String addressesView = "/AddressesView";
@@ -59,6 +73,7 @@ abstract class AppRouter {
   static const String addressesDetails = "/AddressesDetails";
 
   static final route = GoRouter(
+    initialLocation: "/",
     routes: [
       //Language
       GoRoute(
@@ -102,10 +117,12 @@ abstract class AppRouter {
       GoRoute(
           path: successSignUp,
           builder: (context, state) => const SuccessSignUp()),
+      //home
       GoRoute(
         path: home,
         builder: (context, state) => const HomePage(),
       ),
+      //Cart
       GoRoute(
         path: cart,
         builder: (context, state) => BlocProvider(
@@ -113,6 +130,20 @@ abstract class AppRouter {
               CartCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio()))))
                 ..fetchCartView(),
           child: const Cart(),
+        ),
+      ),
+      GoRoute(
+        path: checkout,
+        builder: (context, state) => Checkout(
+          couponId:
+              (state.extra as Map<String, dynamic>?)?["coupon_id"] as int? ??
+                  -1,
+          totalPrice:
+              (state.extra as Map<String, dynamic>?)?["price_order"] as int? ??
+                  0,
+          couponDiscount: (state.extra
+                  as Map<String, dynamic>?)?["coupon_discount"] as int? ??
+              0,
         ),
       ),
       GoRoute(
@@ -130,6 +161,16 @@ abstract class AppRouter {
         path: productDetails,
         builder: (context, state) =>
             ProductDetails(itemModel: state.extra as ItemModel),
+      ),
+      GoRoute(
+        path: favProductDetails,
+        builder: (context, state) =>
+            FavProductDetails(itemModel: state.extra as MyFavoriteModel),
+      ),
+      GoRoute(
+        path: orderDetails,
+        builder: (context, state) =>
+            OrderDetails(orderModel: state.extra as OrderModel),
       ),
       GoRoute(
         path: favorite,
@@ -151,6 +192,14 @@ abstract class AppRouter {
       GoRoute(
         path: addressesAdd,
         builder: (context, state) => const AddressAdd(),
+      ),
+      GoRoute(
+        path: pending,
+        builder: (context, state) => const OrdersPending(),
+      ),
+      GoRoute(
+        path: archive,
+        builder: (context, state) => const OrdersArchive(),
       ),
       GoRoute(
         path: addressesDetails,

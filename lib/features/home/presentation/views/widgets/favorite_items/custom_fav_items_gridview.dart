@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/features/home/presentation/manager/my_favorite_item_cubit/my_favorite_items_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,7 @@ class CustomMyFavoriteItemsGridView extends StatelessWidget {
         } else if (state is MyFavoriteItemsNetworkFailure) {
           return Center(child: Lottie.asset(AppImageAsset.internet));
         } else if (state is MyFavoriteItemsServerFailure) {
+          log(state.errMessage.toString());
           return Center(child: Lottie.asset(AppImageAsset.server));
         } else if (state is MyFavoriteItemsSuccess) {
           if (state.favItem.isEmpty) {

@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donthaveanaccount":
             MessageLookupByLibrary.simpleMessage(" Don\'t have an account ? "),
         "doyouwanttoexitfromthisapp": MessageLookupByLibrary.simpleMessage(
-            "Are you sure you want to exit from this app ?"),
+            "Are you sure you want to exit the app ?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "enteryouremail":
             MessageLookupByLibrary.simpleMessage("Enter your email"),
@@ -64,7 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your username"),
         "findproduct": MessageLookupByLibrary.simpleMessage("Find Product"),
         "forgetpasscontent": MessageLookupByLibrary.simpleMessage(
-            "Please enter your email address to recive a verification code. "),
+            "Please enter your email address to receive a verification code. "),
         "forgetpassword":
             MessageLookupByLibrary.simpleMessage("Forget password"),
         "gotocart": MessageLookupByLibrary.simpleMessage("Go To Cart"),
@@ -102,7 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Password has been reset successfully"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "productforyou":
-            MessageLookupByLibrary.simpleMessage("Product for you"),
+            MessageLookupByLibrary.simpleMessage("Top Selling Products"),
+        "producttopselling":
+            MessageLookupByLibrary.simpleMessage("Top Selling Products"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "reenteryourpassword":
             MessageLookupByLibrary.simpleMessage("Re-Enter your password"),

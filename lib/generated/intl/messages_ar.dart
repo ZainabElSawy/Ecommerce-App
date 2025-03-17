@@ -97,7 +97,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "تم إعادة تعيين كلمة المرور بنجاح"),
         "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
-        "productforyou": MessageLookupByLibrary.simpleMessage("منتجات لك"),
+        "productforyou":
+            MessageLookupByLibrary.simpleMessage("المنتجات الاكثر مبيعا"),
+        "producttopselling":
+            MessageLookupByLibrary.simpleMessage("المنتجات الاكثر مبيعا"),
         "profile": MessageLookupByLibrary.simpleMessage("الشخصية"),
         "reenteryourpassword":
             MessageLookupByLibrary.simpleMessage("أعد إدخال كلمة المرور"),

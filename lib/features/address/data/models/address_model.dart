@@ -7,23 +7,24 @@ class AddressModel {
   double? addressLat;
   double? addressLong;
 
-  AddressModel(
-      {this.addressId,
-      this.addressUsersid,
-      this.addressName,
-      this.addressCity,
-      this.addressStreet,
-      this.addressLat,
-      this.addressLong});
+  AddressModel({
+    this.addressId,
+    this.addressUsersid,
+    this.addressName,
+    this.addressCity,
+    this.addressStreet,
+    this.addressLat,
+    this.addressLong,
+  });
 
   AddressModel.fromJson(Map<String, dynamic> json) {
-    addressId = json['address_id'];
-    addressUsersid = json['address_usersid'];
-    addressName = json['address_name'];
-    addressCity = json['address_city'];
-    addressStreet = json['address_street'];
-    addressLat = json['address_lat'];
-    addressLong = json['address_long'];
+    addressId = int.tryParse(json['address_id'].toString());
+    addressUsersid = int.tryParse(json['address_usersid'].toString());
+    addressName = json['address_name'] as String?;
+    addressCity = json['address_city'] as String?;
+    addressStreet = json['address_street'] as String?;
+    addressLat = double.tryParse(json['address_lat'].toString());
+    addressLong = double.tryParse(json['address_long'].toString());
   }
 
   Map<String, dynamic> toJson() {

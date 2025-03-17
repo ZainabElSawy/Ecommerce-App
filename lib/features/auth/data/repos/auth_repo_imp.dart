@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 
@@ -27,6 +29,7 @@ class AuthRepoImp implements AuthRepo {
         if (data["status"] == "failure") {
           return left(DataFailure(data["message"]));
         } else {
+          log(data['data'].toString());
           User user = User.fromJson(data['data']);
           sharedPreferences!.setInt("userid", user.usersId!);
           // saveUser(user);
@@ -35,8 +38,11 @@ class AuthRepoImp implements AuthRepo {
       } catch (e) {
         // ignore: deprecated_member_use
         if (e is DioError) {
+          log(e.toString());
           return left(ServerFailure.fromDioError(e));
         }
+        log(e.toString());
+
         return left(ServerFailure(e.toString()));
       }
     } else {
@@ -86,7 +92,7 @@ class AuthRepoImp implements AuthRepo {
         if (data["status"] == "failure") {
           return left(DataFailure(data["message"]));
         } else {
-          User user = User.fromJson(data['data'][0]);
+          User user = User.fromJson(data['data']);
           return right(user);
         }
       } catch (e) {
@@ -109,7 +115,8 @@ class AuthRepoImp implements AuthRepo {
       try {
         dynamic data = await authDataSource.checkEmail(email: email);
         if (data["status"] == "failure") {
-          return left(DataFailure(data["message"]));
+          return left(DataFailure(
+              "This Email does not exist, Please try with another email!"));
         } else {
           return right("Success");
         }

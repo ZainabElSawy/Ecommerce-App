@@ -38,6 +38,7 @@ class AddressDataSourceImp extends AddressDataSource {
         await apiService.post(endPoint: AppLinks.addressView, data: {
       "address_usersid": userId,
     });
+    log(data.toString());
     List<AddressModel> addresses;
     if (data["status"] == "failure") {
       addresses = [];

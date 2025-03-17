@@ -6,24 +6,29 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/constant/providers_list.dart';
 import 'core/constant/routes.dart';
+import 'core/functions/langconfig.dart';
+import 'core/services/notification_services.dart';
 import 'features/home/data/models/categories_model.dart';
 import 'features/home/data/models/item_model.dart';
-import 'generated/l10n.dart';
 // Import the generated file
 import 'firebase_options.dart';
 
 SharedPreferences? sharedPreferences;
+late SharedPreferences? prefs;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
+  prefs = await SharedPreferences.getInstance();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationController.initializeLocalNotifications();
+  await NotificationController.initializeIsolateReceivePort();
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(CategoriesModelAdapter());
@@ -37,6 +42,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -46,37 +54,21 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             locale: state.locale,
-            supportedLocales: supportedLocales,
-            localizationsDelegates: localizationsDelegates,
-            localeResolutionCallback: localResolutionCallbackFunc,
+            supportedLocales: LangConfig.supportedLocales,
+            localizationsDelegates: LangConfig.localizationsDelegates,
+            routerConfig: AppRouter.route,
+            localeResolutionCallback: LangConfig.localResolutionCallbackFunc,
             title: 'E-Commerce App',
             theme:
                 state.locale?.languageCode == "ar" ? themeArabic : themeEnglish,
-            routerConfig: AppRouter.route,
           );
         },
       ),
     );
   }
 }
-
-Locale? localResolutionCallbackFunc(deviceLocale, supportedLocales) {
-  for (var locale in supportedLocales) {
-    if (deviceLocale != null &&
-        deviceLocale.languageCode == locale.languageCode) {
-      return deviceLocale;
-    }
-  }
-  return supportedLocales.first;
-}
-
-final Iterable<Locale> supportedLocales = [
-  const Locale('en'),
-  const Locale("ar"),
-];
-const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = [
-  S.delegate,
-  GlobalMaterialLocalizations.delegate,
-  GlobalWidgetsLocalizations.delegate,
-  GlobalCupertinoLocalizations.delegate,
-];
+  //  @override
+  // void initState() {
+  //  // NotificationController.startListeningNotificationEvents();
+  //   super.initState();
+  // }

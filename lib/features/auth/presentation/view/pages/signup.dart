@@ -57,7 +57,13 @@ class _SignUpState extends State<SignUp> {
           child: BlocConsumer<SignUpCubit, SignUpState>(
             builder: (context, state) {
               if (state is SignUpLoading) {
-                return Center(child: Lottie.asset(AppImageAsset.loading));
+                return Center(
+                  child: Lottie.asset(
+                    AppImageAsset.loading,
+                    width: 300,
+                    height: 300,
+                  ),
+                );
               } else if (state is SignUpNetworkFailure) {
                 return FailureWidget(
                   onPressed: signUpMethod,

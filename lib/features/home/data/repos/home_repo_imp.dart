@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 
@@ -5,12 +7,15 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce_app/features/home/data/models/categories_model.dart';
 import 'package:ecommerce_app/features/home/data/models/item_model.dart';
 import 'package:ecommerce_app/features/home/data/models/my_favorite_model.dart';
+import 'package:ecommerce_app/features/home/data/models/settings_model.dart';
 import 'package:ecommerce_app/main.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../domain/repos/home_repo.dart';
 import '../data_sources/home_local_datasource.dart';
 import '../data_sources/home_remote_datasource.dart';
+import '../models/home_model/home_model.dart';
+import '../models/notification_model.dart';
 
 class HomeRepoImp implements HomeRepo {
   final HomeRemoteDataSource homeRemoteDataSource;
@@ -22,13 +27,13 @@ class HomeRepoImp implements HomeRepo {
 
   @override
   Future<Either<Failure, List<CategoriesModel>>> fetchCategories() async {
+    List<CategoriesModel> categories;
+    categories = homeLocalDataSource.fetchCategories();
+    if (categories.isNotEmpty) return right(categories);
     ConnectivityResult connectivityResult =
         await (Connectivity().checkConnectivity());
     if (connectivityResult != ConnectivityResult.none) {
       try {
-        List<CategoriesModel> categories;
-        categories = homeLocalDataSource.fetchCategories();
-        if (categories.isNotEmpty) return right(categories);
         categories = await homeRemoteDataSource.fetchCategories();
         return right(categories);
       } catch (e) {
@@ -50,8 +55,8 @@ class HomeRepoImp implements HomeRepo {
     if (connectivityResult != ConnectivityResult.none) {
       try {
         List<ItemModel> items;
-        items = homeLocalDataSource.fetchItems();
-        if (items.isNotEmpty) return right(items);
+        // items = homeLocalDataSource.fetchItems();
+        // if (items.isNotEmpty) return right(items);
         items = await homeRemoteDataSource.fetchItems();
         return right(items);
       } catch (e) {
@@ -173,9 +178,9 @@ class HomeRepoImp implements HomeRepo {
       return left(NetworkFailure('No internet connection'));
     }
   }
-  
+
   @override
-  Future<Either<Failure, List<ItemModel>?>> search(String srch)async{
+  Future<Either<Failure, List<ItemModel>?>> search(String srch) async {
     ConnectivityResult connectivityResult =
         await (Connectivity().checkConnectivity());
     if (connectivityResult != ConnectivityResult.none) {
@@ -195,4 +200,92 @@ class HomeRepoImp implements HomeRepo {
     }
   }
 
+  @override
+  Future<Either<Failure, List<NotificationsModel>?>>
+      fetchAllNotifications() async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        List<NotificationsModel>? notifications = await homeRemoteDataSource
+            .fetchAllNotifications(sharedPreferences!.getInt("userid")!);
+        return right(notifications);
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ItemModel>?>> fetchOffers() async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        log("fetchOffers ");
+        List<ItemModel>? items;
+        items = await homeRemoteDataSource.fetchOffers();
+        return right(items);
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          log(e.toString());
+          return left(ServerFailure.fromDioError(e));
+        }
+        log(e.toString());
+
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SettingsModel>> fetchSettings() async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        SettingsModel settingsModel;
+        settingsModel = await homeRemoteDataSource.fetchSettings();
+        return right(settingsModel);
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, HomeModel>> fetchHomeContent() async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        HomeModel homeModel;
+        homeModel = await homeRemoteDataSource.fetchHomeContent();
+        return right(homeModel);
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
 }

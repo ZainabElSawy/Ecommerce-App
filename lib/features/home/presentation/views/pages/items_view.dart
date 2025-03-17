@@ -53,7 +53,13 @@ class Items extends StatelessWidget {
                   }
                   return Center(child: Lottie.asset(AppImageAsset.noData));
                 } else if (state is SearchLoading) {
-                  return Center(child: Lottie.asset(AppImageAsset.loading));
+                  return Center(
+                    child: Lottie.asset(
+                      AppImageAsset.loading,
+                      width: 300,
+                      height: 300,
+                    ),
+                  );
                 } else if (state is SearchNetworkFailure) {
                   return Center(child: Lottie.asset(AppImageAsset.internet));
                 } else if (state is SearchServerFailure) {

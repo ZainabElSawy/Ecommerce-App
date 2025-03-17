@@ -12,8 +12,7 @@ class CartItem {
   final String itemsImage;
   final int itemsCount;
   final int itemsActive;
-  // ignore: non_constant_identifier_names
-  final int items_price;
+  final int itemsPriceDiscount;
   final int itemsDiscount;
   final DateTime itemsDate;
   final int itemsCat;
@@ -32,8 +31,7 @@ class CartItem {
     required this.itemsImage,
     required this.itemsCount,
     required this.itemsActive,
-    // ignore: non_constant_identifier_names
-    required this.items_price,
+    required this.itemsPriceDiscount,
     required this.itemsDiscount,
     required this.itemsDate,
     required this.itemsCat,
@@ -41,37 +39,37 @@ class CartItem {
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
-      itemsPrice: json['itemsprice'],
-      countItems: json['countitems'],
-      cartId: json['cart_id'],
-      cartUsersId: json['cart_usersid'],
-      cartItemsId: json['cart_itemsid'],
-      itemsId: json['items_id'],
-      itemsName: json['items_name'],
-      itemsNameAr: json['items_name_ar'],
-      itemsDesc: json['items_desc'],
-      itemsDescAr: json['items_desc_ar'],
-      itemsImage: json['items_image'],
-      itemsCount: json['items_count'],
-      itemsActive: json['items_active'],
-      items_price: json['items_price'],
-      itemsDiscount: json['items_discount'],
-      itemsDate: DateTime.parse(json['items_date']),
-      itemsCat: json['items_cat'],
+      itemsPrice: int.tryParse(json['itemsprice'].toString()) ?? 0,
+      countItems: int.tryParse(json['countitems'].toString()) ?? 0,
+      cartId: int.tryParse(json['cart_id'].toString()) ?? 0,
+      cartUsersId: int.tryParse(json['cart_usersid'].toString()) ?? 0,
+      cartItemsId: int.tryParse(json['cart_itemsid'].toString()) ?? 0,
+      itemsId: int.tryParse(json['items_id'].toString()) ?? 0,
+      itemsName: json['items_name'] as String? ?? '',
+      itemsNameAr: json['items_name_ar'] as String? ?? '',
+      itemsDesc: json['items_desc'] as String? ?? '',
+      itemsDescAr: json['items_desc_ar'] as String? ?? '',
+      itemsImage: json['items_image'] as String? ?? '',
+      itemsCount: int.tryParse(json['items_count'].toString()) ?? 0,
+      itemsActive: int.tryParse(json['items_active'].toString()) ?? 0,
+      itemsPriceDiscount: int.tryParse(json['items_price'].toString()) ?? 0,
+      itemsDiscount: int.tryParse(json['items_discount'].toString()) ?? 0,
+      itemsDate: DateTime.tryParse(json['items_date']) ?? DateTime.now(),
+      itemsCat: int.tryParse(json['items_cat'].toString()) ?? 0,
     );
   }
 }
 
 class CountPrice {
   final int totalPrice;
-  final String totalCount;
+  final int totalCount;
 
   CountPrice({required this.totalPrice, required this.totalCount});
 
   factory CountPrice.fromJson(Map<String, dynamic> json) {
     return CountPrice(
-      totalPrice: json['totalprice'],
-      totalCount: json['totalcount'],
+      totalPrice: int.tryParse(json['totalprice'].toString()) ?? 0,
+      totalCount: int.tryParse(json['totalcount'].toString()) ?? 0,
     );
   }
 }
@@ -85,18 +83,16 @@ class CartModel {
   factory CartModel.fromJson(Map<String, dynamic> json) {
     List<CartItem> itemsList = [];
 
-    if (json['datacart']["status"] == "failure") {
-      itemsList = [];
-    } else {
+    if (json['datacart'] != null && json['datacart']["data"] != null) {
       var list = json['datacart']["data"] as List;
       itemsList = list.map((item) => CartItem.fromJson(item)).toList();
     }
 
     return CartModel(
       cartItems: itemsList,
-      countPrice: json['countprice'] == false
-          ? CountPrice.fromJson({"totalprice": 0, "totalcount": "0"})
-          : CountPrice.fromJson(json['countprice']),
+      countPrice: (json['countprice'] is Map<String, dynamic>)
+          ? CountPrice.fromJson(json['countprice'])
+          : CountPrice(totalPrice: 0, totalCount: 0),
     );
   }
 }

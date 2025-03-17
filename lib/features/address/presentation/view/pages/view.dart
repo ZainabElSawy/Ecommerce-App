@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/features/address/presentation/manager/add_delete_address_cubit/address_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,6 +58,7 @@ class _AddressViewState extends State<AddressView> {
               image: AppImageAsset.internet,
             );
           } else if (state is ViewAddressServerFailure) {
+            log(state.errMessage);
             return FailureWidget(
               onPressed: addressMethod,
               image: AppImageAsset.server,

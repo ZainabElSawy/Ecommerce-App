@@ -8,17 +8,17 @@ ThemeData themeEnglish = ThemeData(
       backgroundColor: AppColor.primarycolor,
       foregroundColor: AppColor.white,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
-      iconTheme: const IconThemeData(color: AppColor.primarycolor),
-      titleTextStyle: const TextStyle(
+      iconTheme: IconThemeData(color: AppColor.primarycolor),
+      titleTextStyle: TextStyle(
         color: AppColor.primarycolor,
         fontWeight: FontWeight.bold,
         fontSize: 25,
         fontFamily: "PlayfairDisplay",
       ),
-      foregroundColor: Colors.grey[50],
+      foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(
@@ -39,22 +39,23 @@ ThemeData themeEnglish = ThemeData(
       ),
     ));
 ThemeData themeArabic = ThemeData(
+  
     fontFamily: "Cairo",
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColor.primarycolor,
       foregroundColor: AppColor.white,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
-      iconTheme: const IconThemeData(color: AppColor.primarycolor),
-      titleTextStyle: const TextStyle(
+      iconTheme: IconThemeData(color: AppColor.primarycolor),
+      titleTextStyle: TextStyle(
         color: AppColor.primarycolor,
         fontWeight: FontWeight.bold,
         fontSize: 25,
         fontFamily: "Cairo",
       ),
-      foregroundColor: Colors.grey[50],
+      foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(

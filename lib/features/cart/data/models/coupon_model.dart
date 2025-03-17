@@ -5,28 +5,33 @@ class CouponModel {
   int? couponDiscount;
   String? couponExpiredate;
 
-  CouponModel(
-      {this.couponId,
-      this.couponName,
-      this.couponCount,
-      this.couponDiscount,
-      this.couponExpiredate});
+  CouponModel({
+    this.couponId,
+    this.couponName,
+    this.couponCount,
+    this.couponDiscount,
+    this.couponExpiredate,
+  });
 
-  CouponModel.fromJson(Map<String, dynamic> json) {
-    couponId = json['coupon_id'];
-    couponName = json['coupon_name'];
-    couponCount = json['coupon_count']??0;
-    couponDiscount = json['coupon_discount']??0;
-    couponExpiredate = json['coupon_expiredate'];
+  // Factory constructor to convert JSON to CouponModel
+  factory CouponModel.fromJson(Map<String, dynamic> json) {
+    return CouponModel(
+      couponId: int.tryParse(json['coupon_id'].toString()) ?? 0,
+      couponName: json['coupon_name'],
+      couponCount: int.tryParse(json['coupon_count'].toString()) ?? 0,
+      couponDiscount: int.tryParse(json['coupon_discount'].toString()) ?? 0,
+      couponExpiredate: json['coupon_expiredate'],
+    );
   }
 
+  // Method to convert CouponModel to JSON
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['coupon_id'] = couponId;
-    data['coupon_name'] = couponName;
-    data['coupon_count'] = couponCount;
-    data['coupon_discount'] = couponDiscount;
-    data['coupon_expiredate'] = couponExpiredate;
-    return data;
+    return {
+      'coupon_id': couponId,
+      'coupon_name': couponName,
+      'coupon_count': couponCount,
+      'coupon_discount': couponDiscount,
+      'coupon_expiredate': couponExpiredate,
+    };
   }
 }

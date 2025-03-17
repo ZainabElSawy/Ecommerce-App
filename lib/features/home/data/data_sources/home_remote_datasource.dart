@@ -1,15 +1,24 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/core/constant/linkapi.dart';
 import 'package:ecommerce_app/features/home/data/models/categories_model.dart';
+import 'package:ecommerce_app/features/home/data/models/settings_model.dart';
 
 import '../../../../core/constant/constants.dart';
 import '../../../../core/functions/save_data.dart';
 import '../../../../core/services/api_services.dart';
+import '../models/home_model/home_model.dart';
 import '../models/item_model.dart';
 import '../models/my_favorite_model.dart';
+import '../models/notification_model.dart';
 
 abstract class HomeRemoteDataSource {
   Future<List<CategoriesModel>> fetchCategories();
+  Future<List<NotificationsModel>?> fetchAllNotifications(int userId);
   Future<List<ItemModel>> fetchItems();
+  Future<SettingsModel> fetchSettings();
+  Future<HomeModel> fetchHomeContent();
+
   Future<List<ItemModel>>? fetchAllItemData(
       {required int catId, required int usersId});
   Future<String> addToFavorite({required int userId, required int itemId});
@@ -17,6 +26,7 @@ abstract class HomeRemoteDataSource {
   Future<String> removeItemFromFavorite({required int favId});
   Future<List<MyFavoriteModel>> fetchMyFavoriteItems({required int userId});
   Future<List<ItemModel>?> search(String srch);
+  Future<List<ItemModel>?> fetchOffers();
 }
 
 class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
@@ -34,8 +44,10 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   @override
   Future<List<ItemModel>> fetchItems() async {
     Map<String, dynamic> data = await apiService.get(endPoint: AppLinks.home);
+    log("items data : ");
+    log(data.toString());
     List<ItemModel> items = getItemsList(data["items"]["data"] ?? []) ?? [];
-    saveItemsData(items, kItems);
+    //saveItemsData(items, kItems);
     return items;
   }
 
@@ -80,6 +92,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
         await apiService.post(endPoint: AppLinks.myFavorite, data: {
       "favorite_usersid": userId,
     });
+    log(data.toString());
     List<MyFavoriteModel> favItems = getFavoriteItemsList(data) ?? [];
 
     return favItems;
@@ -93,12 +106,46 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
     });
     return data["status"];
   }
-  
+
   @override
-  Future<List<ItemModel>?> search(String srch)async {
-    Map<String, dynamic> data = await apiService.post(endPoint: AppLinks.search, data: {"search":srch});
-    List<ItemModel>? items =data["status"]=="success"? getItemsList(data["data"]) : [];
+  Future<List<ItemModel>?> search(String srch) async {
+    Map<String, dynamic> data = await apiService
+        .post(endPoint: AppLinks.search, data: {"search": srch});
+    List<ItemModel>? items =
+        data["status"] == "success" ? getItemsList(data["data"]) : [];
     return items;
+  }
+
+  @override
+  Future<List<NotificationsModel>?> fetchAllNotifications(int userId) async {
+    Map<String, dynamic> data = await apiService.post(
+      endPoint: AppLinks.notifications,
+      data: {"id": userId},
+    );
+    List<NotificationsModel>? notifications =
+        data["status"] == "success" ? getNotificationsList(data["data"]) : [];
+    return notifications;
+  }
+
+  @override
+  Future<List<ItemModel>?> fetchOffers() async {
+    Map<String, dynamic> data = await apiService.get(endPoint: AppLinks.offers);
+    log("$data");
+    List<ItemModel>? items =
+        data["status"] == "success" ? getItemsList(data["data"]) : [];
+    return items;
+  }
+
+  @override
+  Future<SettingsModel> fetchSettings() async {
+    Map<String, dynamic> data = await apiService.get(endPoint: AppLinks.home);
+    return SettingsModel.fromJson(data["settings"]["data"][0]);
+  }
+
+  @override
+  Future<HomeModel> fetchHomeContent() async {
+    Map<String, dynamic> data = await apiService.get(endPoint: AppLinks.home);
+    return HomeModel.fromJson(data);
   }
 }
 
@@ -116,6 +163,14 @@ List<ItemModel>? getItemsList(List data) {
     items.add(ItemModel.fromJson(item));
   }
   return items;
+}
+
+List<NotificationsModel>? getNotificationsList(List data) {
+  List<NotificationsModel> notifications = [];
+  for (var item in data) {
+    notifications.add(NotificationsModel.fromJson(item));
+  }
+  return notifications;
 }
 
 List<MyFavoriteModel>? getFavoriteItemsList(Map<String, dynamic> data) {

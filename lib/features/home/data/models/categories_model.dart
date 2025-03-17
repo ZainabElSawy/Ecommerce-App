@@ -14,15 +14,17 @@ class CategoriesModel extends HiveObject {
   @HiveField(4)
   String? categoriesDatetime;
 
-  CategoriesModel(
-      {this.categoriesId,
-      this.categoriesName,
-      this.categoriesNameAr,
-      this.categoriesImage,
-      this.categoriesDatetime});
+  CategoriesModel({
+    this.categoriesId,
+    this.categoriesName,
+    this.categoriesNameAr,
+    this.categoriesImage,
+    this.categoriesDatetime,
+  });
 
   CategoriesModel.fromJson(Map<String, dynamic> json) {
-    categoriesId = json['categories_id'];
+    // Convert 'categories_id' from String to int
+    categoriesId = int.tryParse(json['categories_id'].toString());
     categoriesName = json['categories_name'];
     categoriesNameAr = json['categories_name_ar'];
     categoriesImage = json['categories_image'];

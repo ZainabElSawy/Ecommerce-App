@@ -34,7 +34,13 @@ class VerifyCodeSignUp extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is VerifyCodeLoading) {
-            return Center(child: Lottie.asset(AppImageAsset.loading));
+            return Center(
+                  child: Lottie.asset(
+                    AppImageAsset.loading,
+                    width: 300,
+                    height: 300,
+                  ),
+                );
           } else if (state is VerifyCodeNetworkFailure) {
             return FailureWidget(
               onPressed: () => verifyCodeMethod(context),

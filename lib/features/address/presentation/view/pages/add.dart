@@ -32,6 +32,7 @@ class _AddressAddState extends State<AddressAdd> {
       target: LatLng(position!.latitude, position!.longitude),
       zoom: 14.4746,
     );
+    addMarkers(LatLng(position!.latitude, position!.longitude));
     setState(() {});
   }
 
@@ -88,7 +89,7 @@ class _AddressAddState extends State<AddressAdd> {
                                 "long": long,
                               });
                         },
-                        child:  Text(
+                        child: Text(
                           S.of(context).complete,
                           style: const TextStyle(fontSize: 18),
                         ),

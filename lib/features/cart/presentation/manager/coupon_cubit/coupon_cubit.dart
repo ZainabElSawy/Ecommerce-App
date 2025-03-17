@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -16,10 +18,15 @@ class CouponCubit extends Cubit<CouponState> {
     var result = await cartRepo.checkCoupon(couponName: couponName);
     result.fold((failure) {
       if (failure is ServerFailure) {
+        log(failure.errorMessage);
         emit(CouponServerFailure(failure.errorMessage));
       } else if (failure is NetworkFailure) {
+        log(failure.errorMessage);
+
         emit(CouponNetworkFailure(failure.errorMessage));
       } else if (failure is DataFailure) {
+        log(failure.errorMessage);
+
         emit(CouponFailure(failure.errorMessage));
       }
     }, (couponModel) {

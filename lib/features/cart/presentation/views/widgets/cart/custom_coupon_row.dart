@@ -15,29 +15,28 @@ class CustomCouponRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: TextFormField(
-              controller: controllercoupon,
-              decoration: const InputDecoration(
-                isDense: true,
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                hintText: "Coupon Code",
-                border: OutlineInputBorder(),
-              ),
+      children: [
+        Expanded(
+          flex: 2,
+          child: TextFormField(
+            controller: controllercoupon,
+            decoration: const InputDecoration(
+              isDense: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              hintText: "Coupon Code",
+              border: OutlineInputBorder(),
             ),
           ),
-          const SizedBox(width: 5),
-          Expanded(
-            flex: 1,
-            child: CustomButtonCoupon(
-              textbutton: 'Apply',
-              onPressed: onApplyCoupon,
-            ),
+        ),
+        const SizedBox(width: 5),
+        Expanded(
+          flex: 1,
+          child: CustomButtonCoupon(
+            textbutton: 'Apply',
+            onPressed: onApplyCoupon,
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

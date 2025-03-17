@@ -91,8 +91,7 @@ class CustomItemCard extends StatelessWidget {
                                     fontSize: 15,
                                     color: AppColor.grey,
                                     fontFamily: "sans",
-                                    decoration: TextDecoration
-                                        .lineThrough, // إضافة الخط على النص
+                                    decoration: TextDecoration.lineThrough,
                                   ),
                                 )
                               : Container(),

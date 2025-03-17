@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/features/cart/data/models/coupon_model.dart';
+import 'package:ecommerce_app/features/orders/data/model/order_model.dart';
 import 'package:ecommerce_app/main.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -110,4 +111,55 @@ class CartRepoImp implements CartRepo {
       return left(NetworkFailure('No internet connection'));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> checkout({
+    required int addressid,
+    required int orderstype,
+    required int pricedelivery,
+    required int ordersprice,
+    required int couponid,
+    required int couponDiscount,
+    required int paymentmethod,
+  }) async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      try {
+        String status = await cartDataSource.checkout(
+          usersid: sharedPreferences!.getInt("userid")!,
+          addressid: addressid,
+          orderstype: orderstype,
+          pricedelivery: pricedelivery,
+          ordersprice: ordersprice,
+          couponid: couponid,
+          couponDiscount: couponDiscount,
+          paymentmethod: paymentmethod,
+        );
+        if (status == "success") {
+          return right(status);
+        } else {
+          return left(
+            DataFailure("Something went wrong ,please try again later!"),
+          );
+        }
+      } catch (e) {
+        // ignore: deprecated_member_use
+        if (e is DioError) {
+          return left(ServerFailure.fromDioError(e));
+        }
+        return left(ServerFailure(e.toString()));
+      }
+    } else {
+      return left(NetworkFailure('No internet connection'));
+    }
+  }
+}
+
+List<OrderModel> getOrdersList(Map<String, dynamic> data) {
+  List<OrderModel> orders = [];
+  for (var item in data["data"]) {
+    orders.add(OrderModel.fromJson(item));
+  }
+  return orders;
 }

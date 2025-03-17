@@ -3,6 +3,7 @@ import 'package:ecommerce_app/core/constant/imageassets.dart';
 import 'package:ecommerce_app/core/constant/routes.dart';
 import 'package:flutter/material.dart';
 
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/functions/alert_log_out.dart';
 
 class Settings extends StatelessWidget {
@@ -53,6 +54,20 @@ class Settings extends StatelessWidget {
                   ),
                 ),
                 ListTile(
+                  title: const Text("Orders"),
+                  trailing: const Icon(Icons.card_travel),
+                  onTap: () {
+                    context.pushPage(route: AppRouter.pending);
+                  },
+                ),
+                ListTile(
+                  title: const Text("Archive"),
+                  trailing: const Icon(Icons.archive),
+                  onTap: () {
+                    context.pushPage(route: AppRouter.archive);
+                  },
+                ),
+                ListTile(
                   title: const Text("Address"),
                   trailing: const Icon(Icons.location_on_outlined),
                   onTap: () {
@@ -67,7 +82,9 @@ class Settings extends StatelessWidget {
                 ListTile(
                   title: const Text("Contact us"),
                   trailing: const Icon(Icons.phone_callback_outlined),
-                  onTap: () {},
+                  onTap: () async {
+                    await launchUrl(Uri.parse("tel:+201064084149"));
+                  },
                 ),
                 ListTile(
                   title: const Text("Logout"),

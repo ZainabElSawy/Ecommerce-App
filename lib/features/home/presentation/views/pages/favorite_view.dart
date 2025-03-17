@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -16,6 +19,7 @@ class FavoriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.backgroundcolor,
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: ListView(
@@ -43,10 +47,17 @@ class FavoriteView extends StatelessWidget {
                   }
                   return Center(child: Lottie.asset(AppImageAsset.noData));
                 } else if (state is SearchLoading) {
-                  return Center(child: Lottie.asset(AppImageAsset.loading));
+                  return Center(
+                    child: Lottie.asset(
+                      AppImageAsset.loading,
+                      width: 300,
+                      height: 300,
+                    ),
+                  );
                 } else if (state is SearchNetworkFailure) {
                   return Center(child: Lottie.asset(AppImageAsset.internet));
                 } else if (state is SearchServerFailure) {
+                  log(state.errMessage.toString());
                   return Center(child: Lottie.asset(AppImageAsset.server));
                 } else {
                   return const Column(

@@ -5,6 +5,7 @@ import '../../../domain/repositories/address_repo.dart';
 
 part 'address_state.dart';
 
+
 class AddressCubit extends Cubit<AddressState> {
   AddressCubit(this.addressRepo) : super(AddressInitial());
   AddressRepo addressRepo;

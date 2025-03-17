@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -54,6 +55,9 @@ alertLogOut(BuildContext context) async {
               elevation: 0,
             ),
             onPressed: () {
+              FirebaseMessaging.instance.unsubscribeFromTopic("users");
+              FirebaseMessaging.instance.unsubscribeFromTopic(
+                  "users${sharedPreferences!.getInt("userid")}");
               sharedPreferences?.remove("userid");
               // ignore: use_build_context_synchronously
               context.pushReplacePage(route: AppRouter.login);
@@ -63,6 +67,7 @@ alertLogOut(BuildContext context) async {
               style: TextStyle(color: AppColor.white),
             ),
           ),
+          //const SizedBox(width: 50),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(false);

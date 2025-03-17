@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/features/home/presentation/manager/add_to_cart_cubit/add_to_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +45,7 @@ class _PriceAndQuantityState extends State<PriceAndQuantity> {
       Row(children: [
         IconButton(
             onPressed: () {
+              log("Add");
               setState(() {
                 count++;
               });

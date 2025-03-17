@@ -33,14 +33,14 @@ class VerifyCodeForgetPassContent extends StatelessWidget {
             numberOfFields: 5,
             borderColor: AppColor.primarycolor,
             showFieldAsBox: true,
-            onCodeChanged: (String code) =>
-                context.read<ForgetPasswordCubit>().code += code,
-            onSubmit: (String verificationCode) => context
+            onSubmit: (String verificationCode) { 
+              context.read<ForgetPasswordCubit>().code = verificationCode;
+              context
                 .read<ForgetPasswordCubit>()
                 .verifyCode(
                     email: email,
                     verifyCode:
-                        int.parse(context.read<ForgetPasswordCubit>().code)),
+                        int.parse(verificationCode));},
           ),
           const SizedBox(height: 30),
         ],

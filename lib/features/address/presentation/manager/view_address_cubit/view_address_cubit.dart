@@ -9,6 +9,7 @@ part 'view_address_state.dart';
 
 class ViewAddressCubit extends Cubit<ViewAddressState> {
   ViewAddressCubit(this.addressRepo) : super(ViewAddressInitial());
+  bool isAddressesNotEmpty=true;
   AddressRepo addressRepo;
   fetchAddress() async {
     emit(ViewAddressLoading());

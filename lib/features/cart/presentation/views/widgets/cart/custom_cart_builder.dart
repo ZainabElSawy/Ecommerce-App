@@ -36,43 +36,55 @@ class _CustomCartBuilderState extends State<CustomCartBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<CouponCubit, CouponState>(
-        listener: (context, state) {
-          if (state is CouponSuccess) {
-            BlocProvider.of<CouponCubit>(context).couponName =
-                state.couponModel.couponName;
-          } else if (state is CouponFailure) {
-            showSnackBar(context, msg: state.errMessage);
-          }
-        },
-        builder: (context, state) {
-          if (state is CouponSuccess) {
+    return BlocConsumer<CouponCubit, CouponState>(
+      listener: (context, state) {
+        if (state is CouponSuccess) {
+          BlocProvider.of<CouponCubit>(context).couponName =
+              state.couponModel.couponName;
+        } else if (state is CouponFailure) {
+          showSnackBar(context, msg: state.errMessage);
+        }
+      },
+      builder: (context, state) {
+        if (state is CouponSuccess) {
+          if (BlocProvider.of<CouponCubit>(context).couponName == null) {
             return CustomCartBody(
               cartModel: widget.cartModel,
               controllercoupon: controllercoupon,
-              discount: state.couponModel.couponDiscount ?? 0,
-            );
-          } else if (state is CouponNetworkFailure) {
-            return FailureWidget(
-              onPressed: () {},
-              image: AppImageAsset.internet,
-            );
-          } else if (state is CouponLoading) {
-            return Center(child: Lottie.asset(AppImageAsset.loading));
-          } else if (state is CouponServerFailure) {
-            return FailureWidget(
-              onPressed: () {},
-              image: AppImageAsset.server,
+              discount: 0,
             );
           }
           return CustomCartBody(
             cartModel: widget.cartModel,
             controllercoupon: controllercoupon,
-            discount: 0,
+            discount: state.couponModel.couponDiscount ?? 0,
+            couponId: state.couponModel.couponId,
           );
-        },
-      ),
+        } else if (state is CouponNetworkFailure) {
+          return FailureWidget(
+            onPressed: () {},
+            image: AppImageAsset.internet,
+          );
+        } else if (state is CouponLoading) {
+          return Center(
+            child: Lottie.asset(
+              AppImageAsset.loading,
+              width: 300,
+              height: 300,
+            ),
+          );
+        } else if (state is CouponServerFailure) {
+          return FailureWidget(
+            onPressed: () {},
+            image: AppImageAsset.server,
+          );
+        }
+        return CustomCartBody(
+          cartModel: widget.cartModel,
+          controllercoupon: controllercoupon,
+          discount: 0,
+        );
+      },
     );
   }
 }
