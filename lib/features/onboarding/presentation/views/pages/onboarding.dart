@@ -1,9 +1,8 @@
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/custombutton.dart';
-import '../widgets/customslider.dart';
-import '../widgets/dotcontroller.dart';
+import '../widgets/onboarding/customslider.dart';
+import '../widgets/onboarding/dotcontroller.dart';
+import '../widgets/onboarding/custom_onboarding_skip_button.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
@@ -15,17 +14,9 @@ class OnBoarding extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(flex: 4, child: CustomSliderOnBoarding()),
-            Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  CustomDotControllerOnBoarding(),
-                  Spacer(flex: 2),
-                  CustomButtonOnBoarding()
-                ],
-              ),
-            ),
+            CustomOnboardingSkipButton(),
+            Expanded(child: CustomSliderOnBoarding()),
+            CustomDotControllerOnBoarding(),
           ],
         ),
       ),

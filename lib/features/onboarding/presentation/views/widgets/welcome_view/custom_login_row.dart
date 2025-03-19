@@ -17,7 +17,7 @@ class CustomLoginRow extends StatelessWidget {
       children: [
         Text(
           "Already have an account? ",
-          style: Styles.textStyleRegular16,
+          style: Styles.textStyleRegular15,
         ),
         InkWell(
           onTap: () {
@@ -29,7 +29,7 @@ class CustomLoginRow extends StatelessWidget {
               decorationColor: AppColor.brownPrimaryColor,
               color: AppColor.brownPrimaryColor,
               decoration: TextDecoration.underline,
-              fontSize: 16.sp,
+              fontSize: 15.sp,
               fontWeight: FontWeight.bold,
             ),
           ),

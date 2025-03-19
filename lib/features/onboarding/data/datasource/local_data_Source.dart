@@ -11,17 +11,17 @@ List<OnBoardingModel> initializeOnBoardingList(BuildContext context) {
     OnBoardingModel(
       title: S.of(context).onboardingtitle1,
       body: S.of(context).onboardingcontent1,
-      image: AppImageAsset.onBoardingImageOne,
+      image: AppImageAsset.imagesOnboardingone,
     ),
     OnBoardingModel(
       title: S.of(context).onboardingtitle2,
       body: S.of(context).onboardingcontent2,
-      image: AppImageAsset.onBoardingImageTwo,
+      image: AppImageAsset.imagesOnboardingtwo,
     ),
     OnBoardingModel(
       title: S.of(context).onboardingtitle3,
       body: S.of(context).onboardingcontent3,
-      image: AppImageAsset.onBoardingImageThree,
+      image: AppImageAsset.imagesOnboardingthree,
     ),
   ];
 }

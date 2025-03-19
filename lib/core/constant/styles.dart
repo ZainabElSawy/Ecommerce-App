@@ -7,12 +7,11 @@ abstract class Styles {
   static late TextStyle textStyle10;
   static late TextStyle textStyle12;
   static late TextStyle textStyleRegular14;
-  static late TextStyle textStyleRegular16;
+  static late TextStyle textStyleRegular15;
   static late TextStyle textStyle16;
   static late TextStyle textStyle18;
   static late TextStyle textStyle20;
-  static late TextStyle textStyleBold25;
-  static late TextStyle textStyle24;
+  static late TextStyle textStyleBold23;
   static late TextStyle textStyle30;
   static void init() {
     textStyleRegular14 = TextStyle(
@@ -20,16 +19,15 @@ abstract class Styles {
       fontSize: 14.sp,
       fontFamily: GoogleFonts.inter().fontFamily,
     );
-    textStyleRegular16 = TextStyle(
+    textStyleRegular15 = TextStyle(
       color: AppColor.blackColor,
-      fontSize: 16.sp,
+      fontSize: 15.sp,
       fontFamily: GoogleFonts.inter().fontFamily,
     );
-    textStyleBold25 = TextStyle(
-      fontSize: 25.sp,
+    textStyleBold23 = TextStyle(
+      fontSize: 23.sp,
       color: AppColor.blackColor,
-      fontWeight: FontWeight.bold,
-      fontFamily: GoogleFonts.inter().fontFamily,
+      fontFamily: GoogleFonts.inter(fontWeight: FontWeight.bold).fontFamily,
     );
     // textStyle12 = TextStyle(
     //   fontSize: 12.sp,

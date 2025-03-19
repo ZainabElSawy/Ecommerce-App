@@ -29,22 +29,22 @@ class WelcomeView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       text: "The ",
-                      style: Styles.textStyleBold25,
+                      style: Styles.textStyleBold23,
                       children: [
                         TextSpan(
                           text: "Fashion App",
-                          style: Styles.textStyleBold25.copyWith(
+                          style: Styles.textStyleBold23.copyWith(
                             color: AppColor.brownPrimaryColor,
                           ), // TextStyle(
                         ),
                         TextSpan(
                           text: "That \nMakes you Look Your Best",
-                          style: Styles.textStyleBold25,
+                          style: Styles.textStyleBold23,
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 24.h),
                   Text(
                     "Discover the latest trends, express \nyourself, and redefine fashion your way. Join us!",
                     style: Styles.textStyleRegular14,

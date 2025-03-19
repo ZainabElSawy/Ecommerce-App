@@ -12,13 +12,10 @@ class CustomOnBoardingImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Image.asset(
-        image,
-        height: size.height / 2.4,
-        fit: BoxFit.fill,
-      ),
+    return Image.asset(
+      image,
+      width: double.infinity,
+      fit: BoxFit.fitWidth,
     );
   }
 }
