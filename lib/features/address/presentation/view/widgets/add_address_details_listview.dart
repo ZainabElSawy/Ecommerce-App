@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../../../../core/shared/custom_button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../auth/presentation/view/widget/customtextformauth.dart';
@@ -43,8 +42,9 @@ class AddAddressDetailsListView extends StatelessWidget {
           myController: name,
         ),
         CustomButton(
-            text: S.of(context).add,
-            onPressed: onPressed)
+          text: S.of(context).add,
+          onTap: onPressed,
+        )
       ],
     );
   }

@@ -41,7 +41,7 @@ class AddtoCartCubit extends Cubit<AddToCartState> {
   }
 
   itemsCountCart({required int itemId}) async {
-    CartDataSource cartDataSource = CartDataSourceImp(ApiService(dio: Dio()));
+    CartDataSource cartDataSource = CartDataSourceImp(ApiService(Dio()));
     String result = await cartDataSource.itemsCountCart(
         itemId: itemId, userId: sharedPreferences!.getInt("userid")!);
     log("*********$result");

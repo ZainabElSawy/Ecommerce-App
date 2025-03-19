@@ -96,6 +96,9 @@ dependencies:
   flutter_rating: ^2.0.2
   flutter_svg: ^2.0.1
   google_fonts: ^4.0.4
+  flutter_screenutil: ^5.9.3
+  get_it: ^8.0.3
+  flutter_native_splash: ^2.4.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -121,8 +124,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/images/
-    - assets/lottie/
+    - assets/images/lottie/
+    - assets/images/logo/
     - assets/ecommerce-69b4a-firebase-adminsdk-nommo-223b9e3fc2.json
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -150,3 +155,10 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/core/constant/
+  filename: imageassets.dart
+  classname: AppImageAsset
+  field_prefix: 
+  ignore_comments: true

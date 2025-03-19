@@ -41,107 +41,105 @@ import '../services/api_services.dart';
 List<BlocProvider<dynamic>> providersList = [
   BlocProvider<UpdateRatingCubit>(
     create: (BuildContext context) => UpdateRatingCubit(
-        OrdersRepoImp(OrdersDataSourceImp(ApiService(dio: Dio())))),
+        OrdersRepoImp(OrdersDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<DeleteOrderCubit>(
-    create: (BuildContext context) => DeleteOrderCubit(
-        OrdersRepoImp(OrdersDataSourceImp(ApiService(dio: Dio())))),
+    create: (BuildContext context) =>
+        DeleteOrderCubit(OrdersRepoImp(OrdersDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<OrdersCubit>(
     create: (BuildContext context) =>
-        OrdersCubit(OrdersRepoImp(OrdersDataSourceImp(ApiService(dio: Dio())))),
+        OrdersCubit(OrdersRepoImp(OrdersDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<OrderDetailsCubit>(
     create: (BuildContext context) => OrderDetailsCubit(
-        OrdersRepoImp(OrdersDataSourceImp(ApiService(dio: Dio())))),
+        OrdersRepoImp(OrdersDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<AddressCubit>(
-    create: (BuildContext context) => AddressCubit(
-        AddressRepoImp(AddressDataSourceImp(ApiService(dio: Dio())))),
+    create: (BuildContext context) =>
+        AddressCubit(AddressRepoImp(AddressDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<ViewAddressCubit>(
     create: (BuildContext context) => ViewAddressCubit(
-        AddressRepoImp(AddressDataSourceImp(ApiService(dio: Dio())))),
+        AddressRepoImp(AddressDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<LocaleCubit>(
     create: (BuildContext context) => LocaleCubit()..getSavedLanguage(),
   ),
   BlocProvider<SignUpCubit>(
     create: (BuildContext context) =>
-        SignUpCubit(AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        SignUpCubit(AuthRepoImp(AuthDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<AddtoCartCubit>(
     create: (BuildContext context) =>
-        AddtoCartCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio())))),
+        AddtoCartCubit(CartRepoImp(CartDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<VerifyCodeCubit>(
     create: (BuildContext context) =>
-        VerifyCodeCubit(AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        VerifyCodeCubit(AuthRepoImp(AuthDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<LoginCubit>(
     create: (BuildContext context) =>
-        LoginCubit(AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+        LoginCubit(AuthRepoImp(AuthDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<CartCubit>(
     create: (BuildContext context) =>
-        CartCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio())))),
+        CartCubit(CartRepoImp(CartDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<CheckoutCubit>(
     create: (BuildContext context) =>
-        CheckoutCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio())))),
+        CheckoutCubit(CartRepoImp(CartDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<CouponCubit>(
     create: (BuildContext context) =>
-        CouponCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio())))),
+        CouponCubit(CartRepoImp(CartDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<ForgetPasswordCubit>(
-    create: (BuildContext context) => ForgetPasswordCubit(
-        AuthRepoImp(AuthDataSourceImp(ApiService(dio: Dio())))),
+    create: (BuildContext context) =>
+        ForgetPasswordCubit(AuthRepoImp(AuthDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<CategoriesCubit>(
     create: (BuildContext context) => CategoriesCubit(HomeRepoImp(
-        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(dio: Dio()))))
+        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio()))))
       ..fetchCategories(),
   ),
   BlocProvider<NotificationsCubit>(
     create: (BuildContext context) => NotificationsCubit(HomeRepoImp(
-        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(dio: Dio())))),
+        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio())))),
   ),
   BlocProvider<ItemsCubit>(
       create: (BuildContext context) => ItemsCubit(HomeRepoImp(
-          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-          homeLocalDataSource: HomeLocalDataSourceImp(ApiService(dio: Dio()))))
+          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+          homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio()))))
         ..fetchItems()),
   BlocProvider<ItemsForCategoryCubit>(
       create: (BuildContext context) => ItemsForCategoryCubit(HomeRepoImp(
-          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-          homeLocalDataSource:
-              HomeLocalDataSourceImp(ApiService(dio: Dio()))))),
+          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+          homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio()))))),
   BlocProvider<SettingsCubit>(
       create: (BuildContext context) => SettingsCubit(HomeRepoImp(
-          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-          homeLocalDataSource: HomeLocalDataSourceImp(ApiService(dio: Dio()))))
+          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+          homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio()))))
         ..fetchSettings()),
   BlocProvider<FavoriteCubit>(
       create: (BuildContext context) => FavoriteCubit(HomeRepoImp(
-          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-          homeLocalDataSource:
-              HomeLocalDataSourceImp(ApiService(dio: Dio()))))),
+          homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+          homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio()))))),
   BlocProvider<RemoveItemFromFavoriteCubit>(
     create: (BuildContext context) => RemoveItemFromFavoriteCubit(
       HomeRepoImp(
-        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(dio: Dio())),
+        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio())),
       ),
     ),
   ),
   BlocProvider<SearchCubit>(
     create: (BuildContext context) => SearchCubit(
       HomeRepoImp(
-        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(dio: Dio())),
+        homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+        homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio())),
       ),
     ),
   ),

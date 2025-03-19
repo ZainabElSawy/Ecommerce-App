@@ -22,7 +22,6 @@ import 'package:ecommerce_app/features/home/presentation/views/pages/items_view.
 import 'package:ecommerce_app/features/home/presentation/views/pages/product_details_view.dart';
 
 import 'package:ecommerce_app/features/onboarding/presentation/views/pages/onboarding.dart';
-import 'package:ecommerce_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -40,8 +39,9 @@ import '../../features/home/presentation/manager/my_favorite_item_cubit/my_favor
 import '../../features/home/presentation/views/pages/fav_product_details.dart';
 import '../../features/home/presentation/views/pages/favorite_view.dart';
 import '../../features/home/presentation/views/pages/home_page.dart';
-import '../../features/language/presentation/views/pages/language.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit/on_boarding_cubit.dart';
+import '../../features/onboarding/presentation/views/pages/splash_view.dart';
+import '../../features/onboarding/presentation/views/pages/welcome_view.dart';
 import '../services/api_services.dart';
 
 abstract class AppRouter {
@@ -51,6 +51,8 @@ abstract class AppRouter {
   static const String verifyCode = "/verifycode";
   static const String resetPassword = "/resetpassword";
   static const String onBoarding = "/onboarding";
+  static const String splash = "/splash";
+  static const String welcome = "/welcome";
   static const String successResetPassword = "/successresetpassword";
   static const String successSignUp = "/successsignup";
   static const String verifyCodeSignUp = "/verifycodesignup";
@@ -78,21 +80,24 @@ abstract class AppRouter {
       //Language
       GoRoute(
         path: "/",
-        builder: (context, state) => sharedPreferences?.getInt("userid") != null
-            ? const HomePage()
-            : sharedPreferences?.getString("onboarding") == null
-                ? const Language()
-                : const Login(),
-        //builder: (context, state) => AddressView(),
+        // builder: (context, state) => sharedPreferences?.getInt("userid") != null
+        //     ? const HomePage()
+        //     : sharedPreferences?.getString("onboarding") == null
+        //         ? const SplachView()
+        //         : const Login(),
+        builder: (context, state) => const SplachView(),
       ),
-      //OnBoarding
+      //*OnBoarding
+      GoRoute(path: splash, builder: (context, state) => const SplachView()),
+      GoRoute(path: welcome, builder: (context, state) => const WelcomeView()),
       GoRoute(
-          path: onBoarding,
-          builder: (context, state) => BlocProvider(
-                create: (context) => OnBoardingCubit(),
-                child: const OnBoarding(),
-              )),
-      //Auth
+        path: onBoarding,
+        builder: (context, state) => BlocProvider(
+          create: (context) => OnBoardingCubit(),
+          child: const OnBoarding(),
+        ),
+      ),
+      //*Auth
       GoRoute(path: login, builder: (context, state) => const Login()),
       GoRoute(path: signup, builder: (context, state) => const SignUp()),
       GoRoute(
@@ -117,17 +122,17 @@ abstract class AppRouter {
       GoRoute(
           path: successSignUp,
           builder: (context, state) => const SuccessSignUp()),
-      //home
+      //*home
       GoRoute(
         path: home,
         builder: (context, state) => const HomePage(),
       ),
-      //Cart
+      //*Cart
       GoRoute(
         path: cart,
         builder: (context, state) => BlocProvider(
           create: (context) =>
-              CartCubit(CartRepoImp(CartDataSourceImp(ApiService(dio: Dio()))))
+              CartCubit(CartRepoImp(CartDataSourceImp(ApiService(Dio()))))
                 ..fetchCartView(),
           child: const Cart(),
         ),
@@ -176,15 +181,13 @@ abstract class AppRouter {
         path: favorite,
         builder: (context, state) => BlocProvider<MyFavoriteItemsCubit>(
           create: (BuildContext context) => MyFavoriteItemsCubit(HomeRepoImp(
-              homeRemoteDataSource:
-                  HomeRemoteDataSourceImp(ApiService(dio: Dio())),
-              homeLocalDataSource:
-                  HomeLocalDataSourceImp(ApiService(dio: Dio()))))
+              homeRemoteDataSource: HomeRemoteDataSourceImp(ApiService(Dio())),
+              homeLocalDataSource: HomeLocalDataSourceImp(ApiService(Dio()))))
             ..fetchMyFavoriteItems(),
           child: const FavoriteView(),
         ),
       ),
-      //address
+      //*address
       GoRoute(
         path: addressesView,
         builder: (context, state) => const AddressView(),

@@ -31,8 +31,6 @@ class ServerFailure extends Failure {
           return ServerFailure('No Internet Connection');
         }
         return ServerFailure('Unexpected Error, Please try later!');
-      default:
-        return ServerFailure("Opps There was an Error, Please try again");
     }
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
@@ -51,6 +49,7 @@ class ServerFailure extends Failure {
 class NetworkFailure extends Failure {
   NetworkFailure(String errorMessage) : super(errorMessage);
 }
+
 class DataFailure extends Failure {
   DataFailure(String errorMessage) : super(errorMessage);
 }

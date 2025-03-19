@@ -1,11 +1,25 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 class ApiService {
-  ApiService({required this.dio});
+  ApiService(this.dio);
   final Dio dio;
 
+  // Future<dynamic> get({required String endPoint}) async {
+  //   var headers = {'Accept': 'application/json'};
+  //   Response response = await dio.request(
+  //     endPoint,
+  //     options: Options(
+  //       method: 'GET',
+  //       headers: headers,
+  //     ),
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     log(json.encode(response.data));
+  //   }
+  //   return response.data;
+  // }
   Future<Map<String, dynamic>> get({required String endPoint}) async {
     try {
       Response response = await dio.get(endPoint);
