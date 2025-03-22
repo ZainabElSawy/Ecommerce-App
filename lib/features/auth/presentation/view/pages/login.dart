@@ -9,12 +9,9 @@ import '../../../../../core/constant/routes.dart';
 import '../../../../../core/functions/alertexitapp.dart';
 import '../../../../../core/functions/custom_error_snack_bar.dart';
 import '../../../../../core/shared/failure_widget.dart';
-import '../../../../../generated/l10n.dart';
 import '../../../../../main.dart';
 import '../../../../../core/functions/notification_helper.dart';
-import '../widget/customauthappbar.dart';
 import '../widget/login_content.dart';
-//import 'package:dio/dio.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -45,58 +42,59 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
-      appBar: CustomAuthAppBar(title: S.of(context).signin),
+      backgroundColor: AppColor.white,
       // ignore: deprecated_member_use
       body: WillPopScope(
         onWillPop: () async => alertExitApp(context),
-        child: Form(
-          key: formState,
-          child: BlocConsumer<LoginCubit, LoginState>(
-            listener: (context, state) {
-              if (state is LoginSuccess) {
-                if (state.user.usersApprove == 1) {
-                  FirebaseMessaging.instance.subscribeToTopic("users");
-                  FirebaseMessaging.instance.subscribeToTopic(
-                      "users${sharedPreferences!.getInt("userid")}");
-                  context.pushPage(route: AppRouter.home);
+        child: SafeArea(
+          child: Form(
+            key: formState,
+            child: BlocConsumer<LoginCubit, LoginState>(
+              listener: (context, state) {
+                if (state is LoginSuccess) {
+                  if (state.user.usersApprove == 1) {
+                    FirebaseMessaging.instance.subscribeToTopic("users");
+                    FirebaseMessaging.instance.subscribeToTopic(
+                        "users${sharedPreferences!.getInt("userid")}");
+                    context.pushPage(route: AppRouter.home);
+                  } else {
+                    context.pushReplacePage(
+                      route: AppRouter.verifyCodeSignUp,
+                      extra: state.user.usersEmail,
+                    );
+                  }
+                } else if (state is LoginFailure) {
+                  customSnackBar(context, state.errMessage);
+                }
+              },
+              builder: (context, state) {
+                if (state is LoginLoading) {
+                  return Center(
+                    child: Lottie.asset(
+                      AppImageAsset.loading,
+                      width: 300,
+                      height: 300,
+                    ),
+                  );
+                } else if (state is LoginNetworkFailure) {
+                  return FailureWidget(
+                    onPressed: loginMethod,
+                    image: AppImageAsset.internet,
+                  );
+                } else if (state is LoginServerFailure) {
+                  return FailureWidget(
+                    onPressed: loginMethod,
+                    image: AppImageAsset.server,
+                  );
                 } else {
-                  context.pushReplacePage(
-                    route: AppRouter.verifyCodeSignUp,
-                    extra: state.user.usersEmail,
+                  return LoginContent(
+                    email: email,
+                    password: password,
+                    formState: formState,
                   );
                 }
-              } else if (state is LoginFailure) {
-                customSnackBar(context, state.errMessage);
-              }
-            },
-            builder: (context, state) {
-              if (state is LoginLoading) {
-                return Center(
-                  child: Lottie.asset(
-                    AppImageAsset.loading,
-                    width: 300,
-                    height: 300,
-                  ),
-                );
-              } else if (state is LoginNetworkFailure) {
-                return FailureWidget(
-                  onPressed: loginMethod,
-                  image: AppImageAsset.internet,
-                );
-              } else if (state is LoginServerFailure) {
-                return FailureWidget(
-                  onPressed: loginMethod,
-                  image: AppImageAsset.server,
-                );
-              } else {
-                return LoginContent(
-                  email: email,
-                  password: password,
-                  formState: formState,
-                );
-              }
-            },
+              },
+            ),
           ),
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/constant/color.dart';
+import '../../../../../../core/constant/routes.dart';
 import '../../../../data/datasource/local_data_Source.dart';
 import '../../../manager/onboarding_cubit/on_boarding_cubit.dart';
 
@@ -72,7 +73,7 @@ class CustomDotControllerOnBoarding extends StatelessWidget {
               const Spacer(),
               InkWell(
                 onTap: state.index == 2
-                    ? null
+                    ? () => context.pushPage(route: AppRouter.login)
                     : () => context
                         .read<OnBoardingCubit>()
                         .pageController
@@ -85,19 +86,14 @@ class CustomDotControllerOnBoarding extends StatelessWidget {
                   padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: state.index == 2
-                        ? Colors.transparent
-                        : AppColor.brownPrimaryColor,
+                    color: AppColor.brownPrimaryColor,
                     border: Border.all(
-                      color: state.index == 2
-                          ? Colors.transparent
-                          : AppColor.brownPrimaryColor,
+                      color: AppColor.brownPrimaryColor,
                     ),
                   ),
                   child: Icon(
                     CupertinoIcons.arrow_right,
-                    color:
-                        state.index == 2 ? Colors.transparent : AppColor.white,
+                    color: AppColor.white,
                     size: 18.sp,
                   ),
                 ),

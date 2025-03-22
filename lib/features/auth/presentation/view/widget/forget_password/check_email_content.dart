@@ -33,12 +33,14 @@ class CheckEmailContent extends StatelessWidget {
             valid: (val) => validInput(val!, 5, 100, "email"),
             hintText: S.of(context).enteryouremail,
             labelText: S.of(context).email,
-            iconData: Icons.email_outlined,
+            // iconData: Icons.email_outlined,
             myController: email,
           ),
           CustomButtonAuth(
             text: S.of(context).check,
-            onPressed: () => context.read<ForgetPasswordCubit>().checkEmail(email: email.text),
+            onPressed: () => context
+                .read<ForgetPasswordCubit>()
+                .checkEmail(email: email.text),
           ),
           const SizedBox(height: 30),
         ],

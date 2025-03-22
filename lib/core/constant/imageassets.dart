@@ -2,7 +2,7 @@
 class AppImageAsset {
   AppImageAsset._();
   static const String rootImage = "assets/images";
-  static const String rootLottie = "assets/lottie";
+  static const String rootLottie = "assets/images/lottie";
 
   static const String logo = "$rootImage/logoapp.png";
   static const String onBoardingImageOne = "$rootImage/one.PNG";
@@ -16,15 +16,26 @@ class AppImageAsset {
   static const String server = "$rootLottie/server.json";
   static const String internet = "$rootLottie/internet_failure.json";
   static const String noData = "$rootLottie/nodata.json";
+
   static const String images1 = "assets/images/1.png";
 
   static const String images2 = "assets/images/2.png";
+
+  static const String imagesAppleLogo = "assets/images/apple_logo.png";
 
   static const String imagesAvatar = "assets/images/avatar.png";
 
   static const String imagesDelivery = "assets/images/delivery.png";
 
   static const String imagesDrivethru = "assets/images/drivethru.png";
+
+  static const String imagesEye = "assets/images/eye.png";
+
+  static const String imagesEyeOff = "assets/images/eye_off.png";
+
+  static const String imagesFacebookLogo = "assets/images/facebook_logo.png";
+
+  static const String imagesGoogleLogo = "assets/images/google_logo.png";
 
   static const String imagesLogo = "assets/images/logo.png";
 

@@ -42,14 +42,14 @@ class SignUpContent extends StatelessWidget {
             valid: (val) => validInput(val!, 3, 30, "username"),
             hintText: S.of(context).enteryourusername,
             labelText: S.of(context).username,
-            iconData: Icons.person_outline,
+            // iconData: Icons.person_outline,
             myController: username,
           ),
           CustomTextFormAuth(
             valid: (val) => validInput(val!, 5, 100, "email"),
             hintText: S.of(context).enteryouremail,
             labelText: S.of(context).email,
-            iconData: Icons.email_outlined,
+            // iconData: Icons.email_outlined,
             myController: email,
           ),
           CustomTextFormAuth(
@@ -57,7 +57,7 @@ class SignUpContent extends StatelessWidget {
             valid: (val) => validInput(val!, 11, 18, "phone"),
             hintText: S.of(context).enteryourphone,
             labelText: S.of(context).phone,
-            iconData: Icons.phone_android_outlined,
+            // iconData: Icons.phone_android_outlined,
             myController: phone,
           ),
           CustomTextFormAuth(

@@ -1,16 +1,20 @@
+import 'package:ecommerce_app/core/shared/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/constant/routes.dart';
 import '../../../../../core/functions/validinput.dart';
 import '../../../../../generated/l10n.dart';
 import '../../manager/login_cubit/login_cubit.dart';
-import 'custombuttonauth.dart';
-import 'customtextbodyauth.dart';
+
+import 'custom_account_row.dart';
+import 'custom_auth_divider.dart';
+import 'custom_auth_subtitle.dart';
+import 'custom_auth_title.dart';
+import 'custom_sign_with_social_row.dart';
+import 'custom_text_button.dart';
 import 'customtextformauth.dart';
-import 'customtextsignuporsignin.dart';
-import 'customtexttitleauth.dart';
-import 'logoauth.dart';
 
 class LoginContent extends StatelessWidget {
   const LoginContent({
@@ -26,64 +30,64 @@ class LoginContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          const LogoAuth(),
-          CustomTextTiteAuth(title: S.of(context).signintitle),
-          const SizedBox(height: 10),
-          CustomTextBodyAuth(content: S.of(context).signincontent),
-          const SizedBox(height: 15),
-          CustomTextFormAuth(
-            valid: (val) => validInput(val!, 5, 100, "email"),
-            hintText: S.of(context).enteryouremail,
-            labelText: S.of(context).email,
-            iconData: Icons.email_outlined,
-            myController: email,
-          ),
-          CustomTextFormAuth(
-            isPassword: true,
-            valid: (val) => validInput(val!, 5, 30, "password"),
-            hintText: S.of(context).enteryourpassword,
-            labelText: S.of(context).password,
-            myController: password,
-          ),
-          GestureDetector(
-            onTap: () => context.pushPage(route: AppRouter.forgetPassword),
-            child: Text(
-              S.of(context).forgetpassword,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily:
-                    // myServices.sharedPreferences!.getString("lang") ==
-                    //         "en"
-                    //     ? "PlayfairDisplay"
-                    //     :
-                    "Cairo",
-              ),
-              textAlign: TextAlign.end,
+    return Padding(
+      padding: EdgeInsets.all(18.w),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 82.h),
+            const CustomAuthTitle(title: "Sign In"),
+            SizedBox(height: 12.h),
+            const CustomAuthSubTitle(
+                subTitle: "Hi! Welcome back, you've been missed"),
+            SizedBox(height: 44.h),
+            CustomTextFormAuth(
+              valid: (val) => validInput(val!, 5, 100, "email"),
+              hintText: "example@gmail.com",
+              labelText: S.of(context).email,
+              myController: email,
             ),
-          ),
-          CustomButtonAuth(
-            text: S.of(context).signin,
-            onPressed: () {
-              var formdata = formState.currentState;
-              if (formdata!.validate()) {
-                BlocProvider.of<LoginCubit>(context)
-                    .login(email: email.text, password: password.text);
-              }
-            },
-          ),
-          const SizedBox(height: 30),
-          CustomTextSignUpOrSignIn(
-            textone: S.of(context).donthaveanaccount,
-            texttwo: S.of(context).signup,
-            onTap: () => context.pushPage(route: AppRouter.signup),
-          ),
-        ],
+            SizedBox(height: 16.h),
+            CustomTextFormAuth(
+              isPassword: true,
+              valid: (val) => validInput(val!, 5, 30, "password"),
+              hintText: "*************",
+              labelText: S.of(context).password,
+              myController: password,
+            ),
+            SizedBox(height: 10.h),
+            Row(
+              children: [
+                const Spacer(),
+                CustomTextButton(
+                  text: "Forget Password?",
+                  onTap: () =>
+                      context.pushPage(route: AppRouter.forgetPassword),
+                ),
+              ],
+            ),
+            SizedBox(height: 26.h),
+            CustomButton(
+              text: "Sign In",
+              onTap: () {
+                var formdata = formState.currentState;
+                if (formdata!.validate()) {
+                  BlocProvider.of<LoginCubit>(context)
+                      .login(email: email.text, password: password.text);
+                }
+              },
+            ),
+            const CustomAuthDivider(text: "Or sign in with"),
+            const CutomSignWithSocialRow(),
+            SizedBox(height: 40.h),
+            CustomAccountRow(
+              text1: "Don't have an account? ",
+              text2: "Sign Up",
+              onTap: () => context.pushPage(route: AppRouter.login),
+            )
+          ],
+        ),
       ),
     );
   }

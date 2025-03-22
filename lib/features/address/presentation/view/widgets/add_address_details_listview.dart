@@ -26,19 +26,19 @@ class AddAddressDetailsListView extends StatelessWidget {
         CustomTextFormAuth(
           hintText: S.of(context).city,
           labelText: S.of(context).city,
-          iconData: Icons.location_city,
+          // iconData: Icons.location_city,
           myController: city,
         ),
         CustomTextFormAuth(
           hintText: S.of(context).street,
           labelText: S.of(context).street,
-          iconData: Icons.streetview,
+          // iconData: Icons.streetview,
           myController: street,
         ),
         CustomTextFormAuth(
           hintText: S.of(context).name,
           labelText: S.of(context).name,
-          iconData: Icons.near_me,
+          // iconData: Icons.near_me,
           myController: name,
         ),
         CustomButton(
